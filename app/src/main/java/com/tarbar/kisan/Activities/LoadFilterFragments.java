@@ -26,6 +26,7 @@ import com.tarbar.kisan.Fragments.KisanMadat_fragment;
 import com.tarbar.kisan.Fragments.PashuGarbhavati_fragment;
 import com.tarbar.kisan.Fragments.PashuOption_fragment;
 import com.tarbar.kisan.Fragments.PashuUpdateOption_fragment;
+import com.tarbar.kisan.Fragments.PashuVyapari_fragment;
 import com.tarbar.kisan.R;
 
 import android.widget.ImageView;
@@ -78,6 +79,7 @@ public class LoadFilterFragments extends AppCompatActivity {
         boolean FreeBijdanListScreen = getIntent().getBooleanExtra("FreeBijdan_fragment", false);
         boolean KisanMadatScreen = getIntent().getBooleanExtra("KisanMadat_fragment", false);
         boolean PashuUpdateScreen = getIntent().getBooleanExtra("PashuUpdate_fragment", false);
+        boolean PashuVyapariScreen = getIntent().getBooleanExtra("PashuVyapari_fragment", false);
 
       if (DoodhLeaderboardScreen) {
           title.setText(R.string.str_doodh_leaderboard);
@@ -139,6 +141,11 @@ public class LoadFilterFragments extends AppCompatActivity {
           bottomMenu.setVisibility(GONE);
           PashuUpdateOption_fragment pashuUpdateOption_fragment = new PashuUpdateOption_fragment();
           replaceFragment(pashuUpdateOption_fragment);
+          resetOtherButtonColors();
+      }  else if (PashuVyapariScreen) {
+          title.setText(R.string.str_pashu_vyapari);
+          PashuVyapari_fragment pashuVyapari_fragment = new PashuVyapari_fragment();
+          replaceFragment(pashuVyapari_fragment);
           resetOtherButtonColors();
       }
     }

@@ -118,6 +118,9 @@ public class constant {
    public static String GET_KISAN_MADAT_LIST = BASE_URL + "users/ax_get_user_list";
 
 
+//   PASHU VYAPARI
+    public static String GET_SELLING_REPORT = BASE_URL + "animals/get_selling_report";
+
 
 }
 

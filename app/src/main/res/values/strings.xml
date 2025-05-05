@@ -369,6 +369,13 @@
     <string name="confirm_delete_selling_details">क्या आप वाकई यह डेटा डिलीट करना चाहते हैं ?</string>
 
 
+<!--    PASHU VYAPARI-->
+    <string name="str_pashu_vyapari">पशु व्यापारी</string>
+    <string name="total_vyapari">टोटल व्यापारी : %1$s</string>
+    <string name="str_total_selling">पशु बेचा टोटल</string>
+    <string name="str_highest_selling">ज्यादा बेचा</string>
+    <string name="str_lowest_selling">कम बेचा</string>
+
 
     <!--     Arrays -->
     <!--     AnimalType -->

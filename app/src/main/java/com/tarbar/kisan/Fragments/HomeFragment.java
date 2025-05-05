@@ -115,8 +115,8 @@ public class HomeFragment extends Fragment {
         pashuBusiness.setOnClickListener(v -> {
             Animation animation = AnimationUtils.loadAnimation(requireContext(), R.anim.click_animation);
             v.startAnimation(animation);
-            Intent i = new Intent(requireContext(), LoadFragments.class);
-            i.putExtra("Fragment_CommingSoon", true);
+            Intent i = new Intent(requireContext(), LoadFilterFragments.class);
+            i.putExtra("PashuVyapari_fragment", true);
             startActivity(i);
             requireActivity().finish();
         });
