@@ -42,6 +42,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.squareup.picasso.Picasso;
+import com.tarbar.kisan.Activities.LoadFilterFragments;
 import com.tarbar.kisan.Activities.LoadFragments;
 import com.tarbar.kisan.Helper.Iconstant;
 import com.tarbar.kisan.Helper.SharedPreferenceManager;
@@ -91,6 +92,7 @@ public class PashuVyapari_Adapter extends RecyclerView.Adapter<PashuVyapari_Adap
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Map<String, String> animalInfo = data.get(position);
+        String userId = animalInfo.get("userId");
 
         holder.txtRank.setText(context.getString(R.string.str_rank) + " : " + getValidText(animalInfo.get("rank")));
         holder.txtVillage.setText(context.getString(R.string.title_village) + " : " + getValidText(animalInfo.get("village")));
@@ -108,13 +110,29 @@ public class PashuVyapari_Adapter extends RecyclerView.Adapter<PashuVyapari_Adap
 
         String mobileNumber = getValidText(animalInfo.get("kisanNumber"));
 
+        holder.imgArrow.setOnClickListener(v -> {
+            Animation animation = AnimationUtils.loadAnimation(context, R.anim.click_animation);
+            v.startAnimation(animation);
+            Intent intent = new Intent(holder.itemView.getContext(), LoadFilterFragments.class);
+            intent.putExtra("PashuVyapariList_fragment", true);
+            intent.putExtra("userId", userId);
+            intent.putExtra("kisanmobileNumber", mobileNumber);
+            Log.d("PashuVyapari_Adapter", "userId: " + userId);
+            Log.d("PashuVyapari_Adapter", "kisanmobileNumber: " + mobileNumber);
+            holder.itemView.getContext().startActivity(intent);
+        });
+
         holder.imgCall.setOnClickListener(v -> {
+            Animation animation = AnimationUtils.loadAnimation(context, R.anim.click_animation);
+            v.startAnimation(animation);
             Intent intent = new Intent(Intent.ACTION_DIAL);
             intent.setData(Uri.parse("tel:" + mobileNumber));
             context.startActivity(intent);
         });
 
         holder.imgWhatsapp.setOnClickListener(v -> {
+            Animation animation = AnimationUtils.loadAnimation(context, R.anim.click_animation);
+            v.startAnimation(animation);
             String number = mobileNumber;
             number = number.replace("+", "").replace(" ", "");
 

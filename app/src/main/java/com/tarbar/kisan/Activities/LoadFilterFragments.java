@@ -26,6 +26,7 @@ import com.tarbar.kisan.Fragments.KisanMadat_fragment;
 import com.tarbar.kisan.Fragments.PashuGarbhavati_fragment;
 import com.tarbar.kisan.Fragments.PashuOption_fragment;
 import com.tarbar.kisan.Fragments.PashuUpdateOption_fragment;
+import com.tarbar.kisan.Fragments.PashuVyapariList_fragment;
 import com.tarbar.kisan.Fragments.PashuVyapari_fragment;
 import com.tarbar.kisan.R;
 
@@ -66,6 +67,7 @@ public class LoadFilterFragments extends AppCompatActivity {
 
         String BijdanId = getIntent().getStringExtra("bijdanId");
 
+        Log.d("LoadFilterFragments", "userId: " + userId);
         Log.d("LoadFilterFragments", "kisanmobileNumber: " + KisanmobileNumber);
         Log.d("LoadFilterFragments", "animalId: " + animalId);
         Log.d("LoadFilterFragments", "animalNumber: " + animalno);
@@ -80,6 +82,7 @@ public class LoadFilterFragments extends AppCompatActivity {
         boolean KisanMadatScreen = getIntent().getBooleanExtra("KisanMadat_fragment", false);
         boolean PashuUpdateScreen = getIntent().getBooleanExtra("PashuUpdate_fragment", false);
         boolean PashuVyapariScreen = getIntent().getBooleanExtra("PashuVyapari_fragment", false);
+        boolean PashuVyapariListScreen = getIntent().getBooleanExtra("PashuVyapariList_fragment", false);
 
       if (DoodhLeaderboardScreen) {
           title.setText(R.string.str_doodh_leaderboard);
@@ -147,6 +150,16 @@ public class LoadFilterFragments extends AppCompatActivity {
           PashuVyapari_fragment pashuVyapari_fragment = new PashuVyapari_fragment();
           replaceFragment(pashuVyapari_fragment);
           resetOtherButtonColors();
+      } else if (PashuVyapariListScreen) {
+          title.setVisibility(GONE);
+          bottomMenu.setVisibility(GONE);
+          PashuVyapariList_fragment pashuVyapariList_fragment = new PashuVyapariList_fragment();
+          Bundle bundle = new Bundle();
+          bundle.putString("userId", userId);
+          bundle.putString("kisanmobileNumber", KisanmobileNumber);
+          pashuVyapariList_fragment.setArguments(bundle);
+          replaceFragment(pashuVyapariList_fragment);
+          resetOtherButtonColors();
       }
     }
 
@@ -163,6 +176,8 @@ public class LoadFilterFragments extends AppCompatActivity {
         bottomMenu = findViewById(R.id.bottomMenu);
 
         iconbutton1 = findViewById(R.id.iconbutton1);
+        iconbutton2 = findViewById(R.id.iconbutton2);
+        iconbutton3 = findViewById(R.id.iconbutton3);
 
         btn1txt = findViewById(R.id.btn1txt);
         btn2txt = findViewById(R.id.btn2txt);

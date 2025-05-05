@@ -70,23 +70,18 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 public class PashuVyapari_fragment extends Fragment {
     private SharedPreferenceManager sharedPrefMgr;
     ProgressDialog dialog;
-    String mobileNumber;
-    TextView txt_all, txt_cow, txt_buffalo, totalVyapari, id_data_not_found,dateRange;
+    String mobileNumber,kisanId;
+    TextView totalVyapari, id_data_not_found, dateRange;
     RecyclerView recyclerView;
     PashuVyapari_Adapter adapter;
     List<Map<String, String>> data = new ArrayList<>();
     List<Map<String, String>> filteredData = new ArrayList<>();
     List<Map<String, String>> filteredSearchData = new ArrayList<>();
-    List<Map<String, String>> activeList;
-    String strkisanNumberFromApi;
-    boolean isAllSelected = false, isCowSelected = false, isBuffaloSelected = false, bySearch = false;
-    String MobileNumber, PashuNumber,type;
-    private String selectedLayout = "";
-    boolean isMobileMatched = false;
-    String fromDate, toDate;
+    boolean bySearch = false;
     AppCompatEditText searchEditText;
     ImageView cancelIcon, filterIcon;
     boolean showHighest = false;
@@ -100,8 +95,10 @@ public class PashuVyapari_fragment extends Fragment {
         view.setBackgroundColor(Color.WHITE);
         sharedPrefMgr = new SharedPreferenceManager(getContext());
         sharedPrefMgr.connectDB();
+        kisanId = sharedPrefMgr.getString(Iconstant.userid);
         mobileNumber = sharedPrefMgr.getString(Iconstant.mobile);
         sharedPrefMgr.closeDB();
+
         totalVyapari = view.findViewById(R.id.totalVyapari);
         id_data_not_found = view.findViewById(R.id.id_data_not_found);
         dateRange = view.findViewById(R.id.dateRange);
@@ -131,7 +128,11 @@ public class PashuVyapari_fragment extends Fragment {
             public void afterTextChanged(Editable s) {}
         });
 
-        filterIcon.setOnClickListener(v -> showFilterPopup());
+        filterIcon.setOnClickListener(v -> {
+            Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.click_animation);
+            v.startAnimation(animation);
+            showFilterPopup();
+        });
 
         recyclerView = view.findViewById(R.id.recyclerView);
         adapter = new PashuVyapari_Adapter(data, requireContext());
@@ -140,10 +141,13 @@ public class PashuVyapari_fragment extends Fragment {
         getSellingList(null, null);
 
         if (loadFilterFragments != null) {
-
             loadFilterFragments.button3.setVisibility(GONE);
+            loadFilterFragments.iconbutton1.setBackgroundResource(R.drawable.icon_calender);
+            loadFilterFragments.iconbutton2.setBackgroundResource(R.drawable.pashu_vyapari);
 
-            loadFilterFragments.bottomMenu.setVisibility(GONE);
+            loadFilterFragments.btn1txt.setText(R.string.str_year);
+            loadFilterFragments.btn2txt.setText(R.string.str_join_as_seller);
+
             loadFilterFragments.swipeRefreshLayout.setOnRefreshListener(() -> {
                 getSellingList(null, null);
             });
@@ -172,7 +176,6 @@ public class PashuVyapari_fragment extends Fragment {
                     v.startAnimation(animation);
                     changeButtonAndTextColor(loadFilterFragments.button2, loadFilterFragments.btn2txt);
                     resetOtherButtonColors(loadFilterFragments.button2);
-
                 }
             });
         }
@@ -354,6 +357,9 @@ public class PashuVyapari_fragment extends Fragment {
                     try {
                         JSONObject jsonObject = new JSONObject(response);
                         String status = jsonObject.optString("status", "");
+                        if (loadFilterFragments.swipeRefreshLayout.isRefreshing()) {
+                            loadFilterFragments.swipeRefreshLayout.setRefreshing(false);
+                        }
                         if ("success".equalsIgnoreCase(status)) {
                             recyclerView.setVisibility(View.VISIBLE);
                             id_data_not_found.setVisibility(View.GONE);
@@ -365,7 +371,7 @@ public class PashuVyapari_fragment extends Fragment {
                                 info.put("userId", obj.optString("userid", ""));
                                 info.put("name", obj.optString("name", ""));
                                 info.put("father_name", obj.optString("father_name", ""));
-                                info.put("surname", obj.optString("surname", ""));
+//                                info.put("surname", obj.optString("surname", ""));
                                 info.put("kisanNumber", obj.optString("kisan_number", ""));
                                 info.put("caste", obj.optString("caste", ""));
                                 info.put("state", obj.optString("state", ""));
@@ -383,10 +389,17 @@ public class PashuVyapari_fragment extends Fragment {
                             totalVyapari.setText(R.string.total_ranks_zero);
                         }
                     } catch (JSONException e) {
+                        dialog.dismiss();
+                        if (loadFilterFragments.swipeRefreshLayout.isRefreshing()) {
+                            loadFilterFragments.swipeRefreshLayout.setRefreshing(false);
+                        }
                         Toast.makeText(getContext(), R.string.json_parsing_error, Toast.LENGTH_SHORT).show();
                     }
                 },
                 error -> {
+                    if (loadFilterFragments.swipeRefreshLayout.isRefreshing()) {
+                        loadFilterFragments.swipeRefreshLayout.setRefreshing(false);
+                    }
                     dialog.dismiss();
                     handleVolleyError(error);
                 });
@@ -440,7 +453,6 @@ public class PashuVyapari_fragment extends Fragment {
             resetOtherButtonColors(loadFilterFragments.button2);
             resetOtherButtonColors(loadFilterFragments.button3);
             resetOtherButtonColors(loadFilterFragments.button1);
-
         });
 
         builder.setPositiveButton(R.string.searchtxt, (dialog1, which) -> {
@@ -473,4 +485,91 @@ public class PashuVyapari_fragment extends Fragment {
         adapter.setOnItemSelectedListener(selectedDateRange -> {
         });
     }
+
+    // Method to get user's businessman status
+//    private void getUserBusinessmanStatus() {
+//        ProgressDialog dialog = new ProgressDialog(getActivity());
+//        dialog.setMessage(getString(R.string.getting_data));
+//        dialog.setCancelable(false);
+//        dialog.show();
+//
+//        String url = constant.BASE_URL + "get_user_businessman_status?userid=" + kisanId;
+//
+//        RequestQueue requestQueue = Volley.newRequestQueue(requireContext());
+//        StringRequest getRequest = new StringRequest(Request.Method.GET, url,
+//                response -> {
+//                    dialog.dismiss();
+//                    try {
+//                        JSONObject jsonObject = new JSONObject(response);
+//                        String status = jsonObject.optString("status", "");
+//                        String message = jsonObject.optString("message", "");
+//
+//                        if ("success".equalsIgnoreCase(status)) {
+//                            boolean isBusinessman = jsonObject.optBoolean("is_businessman", false);
+//                            // Handle the status as needed (e.g., update UI)
+//                            Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+//                        } else {
+//                            Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+//                        }
+//                    } catch (JSONException e) {
+//                        dialog.dismiss();
+//                        Toast.makeText(getContext(), R.string.json_parsing_error, Toast.LENGTH_SHORT).show();
+//                    }
+//                },
+//                error -> {
+//                    dialog.dismiss();
+//                    handleVolleyError(error);
+//                });
+//
+//        getRequest.setRetryPolicy(ApiUtils.DEFAULT_RETRY_POLICY);
+//        requestQueue.add(getRequest);
+//    }
+//
+//    // Method to update user's businessman status
+//    private void updateUserBusinessmanStatus(boolean isBusinessman) {
+//        ProgressDialog dialog = new ProgressDialog(getActivity());
+//        dialog.setMessage(getString(R.string.updating_data));
+//        dialog.setCancelable(false);
+//        dialog.show();
+//
+//        String url = constant.BASE_URL + "update_user_businessman_status";
+//
+//        RequestQueue requestQueue = Volley.newRequestQueue(requireContext());
+//        StringRequest postRequest = new StringRequest(Request.Method.POST, url,
+//                response -> {
+//                    dialog.dismiss();
+//                    try {
+//                        JSONObject jsonObject = new JSONObject(response);
+//                        String status = jsonObject.optString("status", "");
+//                        String message = jsonObject.optString("message", "");
+//
+//                        if ("success".equalsIgnoreCase(status)) {
+//                            Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+//                            // Refresh the status after update
+//                            getUserBusinessmanStatus();
+//                        } else {
+//                            Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+//                        }
+//                    } catch (JSONException e) {
+//                        dialog.dismiss();
+//                        Toast.makeText(getContext(), R.string.json_parsing_error, Toast.LENGTH_SHORT).show();
+//                    }
+//                },
+//                error -> {
+//                    dialog.dismiss();
+//                    handleVolleyError(error);
+//                }) {
+//            @Override
+//            protected Map<String, String> getParams() {
+//                Map<String, String> params = new HashMap<>();
+//                params.put("userid", kisanId);
+//                params.put("is_businessman", String.valueOf(isBusinessman ? 1 : 0));
+//                return params;
+//            }
+//        };
+//
+//        postRequest.setRetryPolicy(ApiUtils.DEFAULT_RETRY_POLICY);
+//        requestQueue.add(postRequest);
+//    }
+
 }

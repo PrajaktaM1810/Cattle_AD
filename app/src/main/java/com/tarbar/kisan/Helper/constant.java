@@ -120,8 +120,9 @@ public class constant {
 
 //   PASHU VYAPARI
     public static String GET_SELLING_REPORT = BASE_URL + "animals/get_selling_report";
-
-
+    public static String GET_USER_SELLING_HISTORY = BASE_URL + "animals/get_user_selling_history";
+    public static String GET_USER_VYAPARI_STATUS = BASE_URL + "animals/get_user_businessman_status";
+    public static String UPDATE_USER_VYAPARI_STATUS = BASE_URL + "animals/update_user_businessman_status";
 }
 
 

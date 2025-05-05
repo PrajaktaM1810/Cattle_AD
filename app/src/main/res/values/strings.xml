@@ -375,6 +375,10 @@
     <string name="str_total_selling">पशु बेचा टोटल</string>
     <string name="str_highest_selling">ज्यादा बेचा</string>
     <string name="str_lowest_selling">कम बेचा</string>
+    <string name="str_join_as_seller">व्यापारी जुड़े</string>
+    <string name="searchkisannumbertxt">किसान नंबर सर्च करें..</string>
+    <string name="str_vyapari_number">व्यापारी नंबर  :  %1$s</string>
+    <string name="confirm_businessman_status_change">क्या आप व्यापारी के रूप में पंजीकरण करना चाहते हैं?</string>
 
 
     <!--     Arrays -->
