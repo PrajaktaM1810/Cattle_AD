@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="LogoBlue">#00adef</color>
+
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="green">#1DCC00</color>
+    <color name="orange">#FF8C00</color>
+    <color name="grey">#CCCAC9</color>
+    <color name="blue_color_gradient">#4e54c8</color>
+    <color name="blue">#268ECD</color>
+    <color name="transparent">#FFFFFF</color>
+    <color name="update_button_color">#009306</color>
+    <color name="delete_button_color">#BF0000</color>
+    <color name="total_pashu_option_color">#009F07</color>
+    <color name="edit_option_color">#006FC8</color>
+    <color name="delete_option_color">#F44336</color>
+
+    <color name="bgColor">#0000</color>
+    <color name="IconBlue">#268ECD</color>
+
+<!--    Registration-->
+    <color name="black_80">#80000000</color>
+
+<!--    MainActivity-->
+    <color name="MainScreeBg">#F7F7F8</color>
+
+<!--    Profile-->
+    <color name="fifty_orange">#80FF8C00</color>
+
+<!--    Pashu-->
+    <color name="data_not_fount_txt">#80000000</color>
+
+<!--    BullList-->
+    <color name="txt_bg">#E6FFFFFF</color>
+
+</resources>

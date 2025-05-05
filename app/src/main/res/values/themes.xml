@@ -1,0 +1,17 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Base Theme -->
+    <style name="Base.Theme.CattleApp" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Status bar color -->
+        <item name="android:statusBarColor">@color/LogoBlue</item>
+        <!-- Status bar text/icons (dark text/icons if true, light text/icons if false) -->
+        <item name="android:windowLightStatusBar">false</item>
+        <!-- Navigation bar color -->
+        <item name="android:navigationBarColor">@android:color/white</item>
+        <!-- Default background color for all screens -->
+        <item name="android:windowBackground">@android:color/white</item>
+    </style>
+
+    <!-- App Theme -->
+    <style name="Theme.CattleApp" parent="Base.Theme.CattleApp" />
+</resources>

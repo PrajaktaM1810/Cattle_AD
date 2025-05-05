@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/lyt_toolbar" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linearLayout2"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+        app:layout_constraintVertical_bias="0.0"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingTop="16dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp">
+
+            <!--            Pashu Number-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:background="@drawable/bg_form">
+
+                <ImageView
+                    android:id="@+id/pashuImage"
+                    android:layout_width="60dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/pashunum" />
+
+                <EditText
+                    android:id="@+id/AnimalNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/bgColor"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/black"
+                    android:paddingRight="10dp"
+                    android:hint= "@string/error_add_pashu_number"
+                    android:inputType="number"
+                    android:layout_gravity="center_vertical"
+                    android:maxLength="12"
+                    android:textSize="@dimen/txt_14" />
+            </LinearLayout>
+
+            <!--            Pashu Type-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:orientation="horizontal"
+                android:layout_marginTop="15dp"
+                android:gravity="center_vertical"
+                android:background="@drawable/bg_form">
+
+                <EditText
+                    android:id="@+id/AnimalType"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:layout_toLeftOf="@+id/cowImg"
+                    android:background="@color/bgColor"
+                    android:gravity="center_vertical"
+                    android:inputType="number"
+                    android:textColor="@color/black"
+                    android:maxLength="12"
+                    android:paddingStart="10dp"
+                    android:enabled="false"
+                    android:focusable="false"
+                    android:textSize="@dimen/txt_14"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/cowImg"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/cowImg"
+                    android:layout_width="50dp"
+                    android:layout_height="35dp"
+                    android:layout_gravity="center_vertical"
+                    android:contentDescription="Pashu Number Image"
+                    android:src="@drawable/cow_img"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/buffaloImg"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/buffaloImg"
+                    android:layout_width="50dp"
+                    android:layout_height="35dp"
+                    android:layout_gravity="center_vertical"
+                    android:contentDescription="Pashu Number Image"
+                    android:src="@drawable/buffalo_img"
+                    android:layout_marginRight="3dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!--           Pashu Jati -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="15dp"
+                android:layout_gravity="center"
+                android:background="@drawable/bg_form">
+
+                <Spinner
+                    android:id="@+id/AnimalJati"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#0000"
+                    android:layout_margin="8dp"
+                    android:gravity="center"
+                    android:layout_gravity="center" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+<!--            PashuGender-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:orientation="horizontal"
+                android:layout_marginTop="15dp"
+                android:gravity="center_vertical"
+                android:background="@drawable/bg_form">
+
+                <EditText
+                    android:id="@+id/AnimalGender"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:textColor="@color/black"
+                    android:enabled="false"
+                    android:focusable="false"
+                    android:background="@color/bgColor"
+                    android:gravity="center_vertical"
+                    android:maxLength="12"
+                    android:paddingStart="4dp"
+                    android:paddingRight="10dp"
+                    android:textSize="@dimen/txt_14" />
+            </LinearLayout>
+
+            <!--            Pashu byat number-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:orientation="horizontal"
+                android:layout_marginTop="15dp"
+                android:gravity="center_vertical"
+                android:background="@drawable/bg_form">
+
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="28dp"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/pashu_mandi"
+                    android:contentDescription="Pashu Number Image" />
+
+                <EditText
+                    android:id="@+id/ByatNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/bgColor"
+                    android:gravity="center_vertical"
+                    android:paddingRight="10dp"
+                    android:textColor="@color/black"
+                    android:hint="@string/error_enter_byat_number"
+                    android:inputType="number"
+                    android:layout_gravity="center_vertical"
+                    android:maxLength="1"
+                    android:textSize="@dimen/txt_14" />
+            </LinearLayout>
+
+            <!--            birthdate-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:orientation="horizontal"
+                android:layout_marginTop="15dp"
+                android:gravity="center_vertical"
+                android:background="@drawable/bg_form">
+
+                <ImageView
+                    android:id="@+id/calenderImg"
+                    android:layout_width="60dp"
+                    android:layout_height="28dp"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/calender_img"
+                    android:contentDescription="Pashu Number Image" />
+
+                <EditText
+                    android:id="@+id/AnimalBirthdate"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/bgColor"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/black"
+                    android:paddingRight="10dp"
+                    android:hint= "@string/error_pashu_birhtdate"
+                    android:layout_gravity="center_vertical"
+                    android:maxLength="20"
+                    android:textSize="@dimen/txt_14" />
+            </LinearLayout>
+
+            <!--            FarmerNumber-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:orientation="horizontal"
+                android:layout_marginTop="15dp"
+                android:gravity="center_vertical"
+                android:background="@drawable/bg_form">
+
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="28dp"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/profile_new"
+                    android:contentDescription="Pashu Number Image" />
+
+                <EditText
+                    android:id="@+id/KisanMobileNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/bgColor"
+                    android:gravity="center_vertical"
+                    android:paddingRight="10dp"
+                    android:inputType="number"
+                    android:textColor="@color/black"
+                    android:layout_gravity="center_vertical"
+                    android:maxLength="20"
+                    android:enabled="false"
+                    android:focusable="false"
+                    android:textSize="@dimen/txt_14" />
+            </LinearLayout>
+
+            <!--            Password-->
+            <LinearLayout
+                android:id="@+id/PasswordLayout"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/bg_form">
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="28dp"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/password_img" />
+
+                <EditText
+                    android:id="@+id/KisanPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/bgColor"
+                    android:gravity="center_vertical"
+                    android:paddingRight="10dp"
+                    android:textColor="@color/black"
+                    android:hint="@string/enter_password_number"
+                    android:inputType="numberPassword"
+                    android:maxLength="4"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="@dimen/txt_14" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/submit"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="50dp"
+                android:layout_marginBottom="40dp"
+                android:background="@drawable/big_button"
+                android:clipToOutline="true"
+                android:text="@string/save"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+

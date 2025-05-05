@@ -1,0 +1,428 @@
+<resources>
+    <string name="app_name">तरबार किसान</string>
+    <string name="type_your_i">अपना नंबर दर्ज करें</string>
+    <string name="some_id">12345</string>
+    <string name="enter_passw">पासवर्ड दर्ज करें</string>
+    <string name="get_started">लॉग इन करें</string>
+    <string name="login">login.php</string>
+    <string name="register">register.php</string>
+    <string name="profile">profile.php</string>
+    <!--     API CATCHE AND ERROR TEXTS -->
+    <string name="encoding_error">समर्थित एन्कोडिंग त्रुटि। कृपया फिर से प्रयास करें।</string>
+    <string name="json_parsing_error">JSON पार्सिंग त्रुटि। कृपया फिर से प्रयास करें।</string>
+    <string name="generic_error">एक त्रुटि हुई। कृपया फिर से प्रयास करें।</string>
+    <string name="timeout_error">अनुरोध समय पर समाप्त हो गया। कृपया फिर से प्रयास करें।</string>
+    <string name="no_connection_error">कोई इंटरनेट कनेक्शन नहीं है। कृपया अपने नेटवर्क की जांच करें और फिर से प्रयास करें।</string>
+    <string name="auth_failure_error">प्रमाणन विफलता। कृपया फिर से प्रयास करें।</string>
+    <string name="server_error">सर्वर त्रुटि। कृपया बाद में पुनः प्रयास करें।</string>
+    <string name="network_error">नेटवर्क त्रुटि। कृपया फिर से प्रयास करें।</string>
+    <string name="parse_error">Parse त्रुटि। कृपया फिर से प्रयास करें।</string>
+    <string name="unknown_error">एक अज्ञात त्रुटि हुई। कृपया फिर से प्रयास करें।</string>
+    <!--     ProgressBar Texts -->
+    <string name="Verifying">आपकी जानकारी का सत्यापन हो रहा है..</string>
+    <string name="Saving">आपकी जानकारी सेव हो रही है..</string>
+    <string name="sending_otp">ओटीपी इस नंबर पर भेजा जा रहा है..</string>
+    <string name="setting_pin">आपका पिन सेट किया जा रहा है..</string>
+    <string name="verifying_pin">आपके पिन को जाँच किया जा रहा है..</string>
+    <string name="reseting_password">आपका पासवर्ड रीसेट किया जा रहा है..</string>
+    <string name="getting_data">डेटा लोड हो रहा है..</string>
+    <string name="saving_data">डेटा सेव हो रहा है..</string>
+    <string name="profile_image_removal">आपकी प्रोफाइल इमेज हटाई जा रही है..</string>
+    <!--     SplashScreen -->
+    <string name="download_version">प्रिय किसान, हमने ऐप का नया वर्जन जारी किया है। कृपया इसे अपडेट करें और नए फीचर्स का लाभ उठाएं।</string>
+    <string name="download_new_version">नया वर्जन डाउनलोड करें</string>
+    <!--     Login -->
+    <string name="hello">नमस्ते !</string>
+    <string name="login_here">यहा लॉगिन करें</string>
+    <string name="enter_mobile_number">मोबाईल नंबर दर्ज करें</string>
+    <string name="enter_password_number">पासवर्ड दर्ज करें</string>
+    <string name="forget_password">पासवर्ड भूल गए ?</string>
+    <string name="login_txt">लॉग इन करें</string>
+    <string name="registration">पंजीकरण करवाना</string>
+    <string name="enter_correct_mobile_number">कृपया सही 10 अंक का मोबाईल नंबर डाले</string>
+    <string name="enter_correct_password">कृपया सही 4 अंक का पासवर्ड डाले</string>
+    <string name="sendPassword">इस नंबर का पासवर्ड भूल गए हैं। कृपया पासवर्ड भेजे ।</string>
+    <string name="get_password">पासवर्ड प्राप्त करें</string>
+    <string name="cancel">रद्द करें</string>
+    <string name="searchtxt">सर्च करें</string>
+    <string name="ok">ठीक है</string>
+    <string name="do_message">मैसेज करें</string>
+    <string name="help_feedback">सहायता / फीडबैक</string>
+    <string name="need_help">सहायता</string>
+    <string name="enter_login_mobile_number">अपना लॉगिन मोबाइल नंबर दर्ज करें</string>
+    <string name="whatsapp_not_installed">इस डिवाइस पर व्हाट्सएप इंस्टॉल नहीं है</string>
+    <!--     Mpin Setting -->
+    <string name="set_mpin_title">अपना पिन सेट करें</string>
+    <string name="set_mpin_subtitle">यह पिन आपके खाते की पहुंच की सुरक्षा के लिए\nआवश्यक है ।</string>
+    <string name="enter_mpin">पिन दर्ज करें</string>
+    <string name="set_mpin">पिन सेट करें</string>
+    <string name="empty_mpin">कृपया 4 अंक का पिन दर्ज करें</string>
+    <string name="enter_correct_mpin">कृपया सही पिन दर्ज करें (4 अंक)</string>
+    <string name="successfully_registered">आपका पंजीकरण सफलतापूर्वक हो गया है</string>
+    <!--     Verify Mpin -->
+    <string name="verify_pin">पिन की पुष्टि करें</string>
+    <string name="please_enter_pin">कृपया ऐप के लिए सेट किया गया पिन दर्ज करें</string>
+    <string name="verify">पुष्टि करें</string>
+    <string name="forget_pin">पिन भूल गए ?</string>
+    <string name="reset_pin">पिन रीसेट करें</string>
+    <string name="confirm_pin">सही पिन की पुष्टि करें</string>
+    <!-- Reset Pawword -->
+    <string name="set_new_password">अपना नया पासवर्ड सेट करें</string>
+    <string name="enter_old_password">पुराना पासवर्ड डालें</string>
+    <string name="enter_new_password">नया पासवर्ड डालें</string>
+    <string name="confirm_new_password">नए पासवर्ड की पुष्टि करें</string>
+    <string name="save">सेव करें</string>
+    <!--     Hindi texts -->
+    <string name="yearString">साल</string>
+    <string name="monthString">महिने</string>
+    <string-array name="roles">
+        <item>--भूमिकाएँ चुनें--</item>
+        <item>किसान</item>
+        <item>व्यवसायी</item>
+        <item>चिकित्सक</item>
+        <!--  Add more state names as needed  -->
+    </string-array>
+    <string-array name="price_array">
+        <item>1000</item>
+        <item>5000</item>
+        <item>10000</item>
+    </string-array>
+    <string-array name="type_array">
+        <item>गिर गाय</item>
+        <item>साहीवाल गाय</item>
+        <item>कांग्रेस गाय</item>
+    </string-array>
+    <string-array name="animaltype_array">
+        <item>गाय</item>
+        <item>भैंस</item>
+    </string-array>
+    <string-array name="animalgender_array">
+        <item>पुरुष</item>
+        <item>महिला</item>
+    </string-array>
+    <!--     Registration -->
+    <string name="register_user">नया रजिस्ट्रेशन करेंं</string>
+    <string name="register_sub_title">अपना विवरण भरें</string>
+    <string name="note_txt">सूचना : कृपया अपनी जानकारी हिंदी में भरें ।</string>
+    <string name="enter_name">नाम दर्ज करें</string>
+    <string name="enter_caste">जाति दर्ज करें</string>
+    <string name="enter_address">पता दर्ज करें</string>
+    <string name="already_have_an_account">पहले से खाता है? लॉगिन करें</string>
+    <string name="hint_enter_name">नाम दर्ज करें</string>
+    <string name="hint_enter_father_name">पिता का नाम दर्ज करें</string>
+    <string name="hint_enter_surname">उपनाम/सरनेम दर्ज करें</string>
+    <string name="hint_caste">जाति दर्ज करें</string>
+    <string name="hint_role">भूमिका चुनें</string>
+    <string name="hint_state">राज्य चुनें</string>
+    <string name="hint_jilha">जिला चुनें</string>
+    <string name="hint_tahsil">तहसील चुनें</string>
+    <string name="hint_village">गाँव चुनें</string>
+    <string name="state_not_selected">राज्य उपलब्ध नहीं है</string>
+    <string name="jilha_not_selected">कोई जिला उपलब्ध नहीं है</string>
+    <string name="tahsil_not_selected">कोई तहसील उपलब्ध नहीं है</string>
+    <string name="village_not_selected">कोई गाँव उपलब्ध नहीं है</string>
+    <string name="hint_address">अपना पता दर्ज करें</string>
+    <!--     MainActivity -->
+    <string name="txt_ghar">घर</string>
+    <string name="txt_pashu">पशु</string>
+    <string name="txt_pashu_doodh">पशु दूध</string>
+    <string name="txt_profile">प्रोफाइल</string>
+    <!--     HomeFragement -->
+    <string name="free_bijdan">फ्री बीजदान</string>
+    <string name="pashu_doctor">पशु डॉक्टर</string>
+    <string name="pashu_vyapari">पशु व्यापारी</string>
+    <string name="kisan_madat">किसान मदद</string>
+    <string name="bull">बुल Bull</string>
+    <string name="pashu_garbhvati">पशु गर्भवती</string>
+    <string name="pashu_update">पशु अपडेट</string>
+    <string name="pashu_mandi">पशु मंडी</string>
+    <string name="feature_coming_soon">हम इस फीचर को जल्द ही लॉन्च करेंगे !</string>
+    <!--     CompanyProfile -->
+    <string name="company_name">एम. एच. तरबार</string>
+    <string name="company_chairman_opt">चेयरमैन</string>
+    <string name="company_text1">1) तरबार किसान - भारत</string>
+    <string name="company_text2">2) तरबार पशुधन - भारत</string>
+    <string name="company_text3">3) गोचर रतन - भारत</string>
+    <!--     ProfileFragment -->
+    <string name="edit_profile">प्रोफ़ाइल एडिट करें</string>
+    <string name="reset_password">पासवर्ड रीसेट करें</string>
+    <string name="logout">लॉगआउट करें</string>
+    <string name="ad_top">एड ऊपर</string>
+    <string name="ad_bottom">एड नीचे</string>
+    <string name="confirm_logout">क्या आप वाकई लॉगआउट करना चाहते हैं ?</string>
+    <string name="no">नहीं</string>
+    <string name="yes">हाँ</string>
+
+    <!--     AddAnimal -->
+    <string name="hint_choose_caste">जाति चुनें</string>
+    <string name="error_add_pashu_number">पशु नंबर दर्ज करें</string>
+    <string name="error_enter_byat_number">ब्यात नंबर दर्ज करें</string>
+    <string name="error_pashu_birhtdate">पशु की जन्म तिथि दर्ज करें</string>
+    <string name="error_password_not_matching">डाला गया पासवर्ड लॉगिन पासवर्ड से मेल नहीं खाता</string>
+    <string name="error_number_too_short">12 अंकों का सही पशु नंबर डालें</string>
+    <string name="error_byat_number_too_short">12 अंकों का सही ब्यात नंबर डालें</string>
+    <string name="error_byat_cnt">सही ब्यात नंबर डालें</string>
+    <string name="total_pashu">टोटल पशु  :  %1$s</string>
+    <string name="kisan_number">किसान नंबर  :  %1$s</string>
+
+    <!--     <string name="hint_enter_mother_number">माँ का नंबर डालें</string> -->
+    <!--     <string name="hint_enter_father_number">पिता का नंबर डालें</string> -->
+    <!--     <string name="hint_enter_pidhi3_number">पीढ़ी 3 का नंबर डालें</string> -->
+    <!--     <string name="hint_enter_pidhi4_number">पीढ़ी 4 का नंबर डालें</string> -->
+    <!--     <string name="hint_enter_pidhi5_number">पीढ़ी 5 का नंबर डालें</string> -->
+    <!--     <string name="hint_enter_pidhi6_number">पीढ़ी 6 का नंबर डालें</string> -->
+    <!--     <string name="hint_enter_pidhi7_number">पीढ़ी 7 का नंबर डालें</string> -->
+    <!--     <string name="hint_enter_tarbar_number">तरबार नंबर डालें</string> -->
+    <string name="error_mother_number">12 अंकों वाला माँ का नंबर सही से डालें</string>
+    <string name="error_father_number">12 अंकों वाला पिता का नंबर सही से डालें</string>
+    <string name="error_pidhi3_number">12 अंकों वाला पीढ़ी 3 का नंबर सही से डालें</string>
+    <string name="error_pidhi4_number">12 अंकों वाला पीढ़ी 4 का नंबर सही से डालें</string>
+    <string name="error_pidhi5_number">12 अंकों वाला पीढ़ी 5 का नंबर सही से डालें</string>
+    <string name="error_pidhi6_number">12 अंकों वाला पीढ़ी 6 का नंबर सही से डालें</string>
+    <string name="error_pidhi7_number">12 अंकों वाला पीढ़ी 7 का नंबर सही से डालें</string>
+    <string name="title_kisan_name">किसान का नाम</string>
+    <string name="title_password">पासवर्ड</string>
+    <!--     <string name="ad_top">एड ऊपर</string> -->
+    <!--     <string name="ad_bottom">एड नीचे</string> -->
+    <!--     <string name="confirm_logout">क्या आप वाकई लॉगआउट करना चाहते हैं ?</string> -->
+    <!--     <string name="no">नहीं</string> -->
+    <!--     <string name="yes">हाँ</string> -->
+    <!--    EditAnimalProfile -->
+    <string name="delete_animal_profile">मिटाए</string>
+
+    <string name="kisan_info_label">किसान की जानकारी</string>
+    <string name="txt_edit_profile">अपनी जानकारी प्रोफ़ाइल से भरें</string>
+    <!--     <string name="error_add_pashu_number">पशु नंबर दर्ज करें</string> -->
+    <!--     <string name="error_enter_byat_number">ब्यात नंबर दर्ज करें</string> -->
+    <!--     <string name="error_pashu_birhtdate">पशु की जन्म तिथि दर्ज करें </string> -->
+    <!--    ViewAnimalProfile -->
+    <string name="title_pashu_number">पशु नंबर</string>
+    <string name="title_pashu_prakar">पशु प्रकार</string>
+    <string name="title_pashu_jati">पशु जाति</string>
+    <string name="title_pashu_gender">पशु लिंग</string>
+    <string name="title_byat_number">ब्यात नंबर</string>
+    <string name="title_pashu_birthdate">पशु जन्मतिथि</string>
+    <string name="title_kisan_mobile_number">किसान का नंबर</string>
+    <string name="title_pidhi">पीढ़ी</string>
+    <string name="title_mother_number">माँ का नंबर</string>
+    <string name="title_father_number">पिता का नंबर</string>
+    <string name="title_pahsu_father_number">पशु पिता नंबर</string>
+    <string name="title_generation_2_number">पिढ़ी 2 का नंबर</string>
+    <string name="title_generation_3_number">पिढ़ी 3 का नंबर</string>
+    <string name="title_generation_4_number">पिढ़ी 4 का नंबर</string>
+    <string name="title_generation_5_number">पिढ़ी 5 का नंबर</string>
+    <string name="title_generation_6_number">पिढ़ी 6 का नंबर</string>
+    <string name="title_tarbar_number">तरबार नंबर</string>
+
+    <string name="hint_tarbar_number">तरबार नंबर दर्ज करें</string>
+    <string name="hint_doctor_number">डॉक्टर नंबर दर्ज करें</string>
+    <string name="hint_choose_gender">लिंग चुनें</string>
+    <string name="str_data_not_found">डेटा उपलब्ध नहीं है</string>
+
+    <!--     EditProfile -->
+    <string name="title_profile">किसान प्रोफ़ाइल</string>
+    <string name="title_name">अपना नाम</string>
+    <string name="title_father_name">पिता का नाम</string>
+    <string name="title_surname">उपनाम/सरनेम</string>
+    <string name="title_mobile">मोबाईल नंबर</string>
+    <string name="title_caste">जाति</string>
+    <string name="title_role">भूमिका</string>
+    <string name="title_state">राज्य</string>
+    <string name="title_address">पता</string>
+    <string name="title_village">गाँव</string>
+    <string name="title_tahsil">तहसील</string>
+    <string name="title_jilha">ज़िला</string>
+    <string name="cant_select_img">चयनित छवि लोड नहीं कर पाए</string>
+    <string name="camera_isnt_available">कैमरा उपलब्ध नहीं है</string>
+    <string name="choose_img">छवि स्रोत चुनें..</string>
+    <string name="camera_option">कैमरा</string>
+    <string name="gallary_option">गैलरी</string>
+    <string name="remove_img_option">हटाएं</string>
+    <string name="camera_not_available">कैमरा उपलब्ध नहीं है</string>
+
+
+    <!--     OTP Verification -->
+    <string name="enter_otp">ओटीपी दर्ज करें</string>
+
+
+    <!--     <string name="verify_otp">ओटीपी की पुष्टि करें</string> -->
+    <string name="verifying_otp">ओटीपी की पुष्टि हो रही है</string>
+    <string name="please_enter_otp">निचे दिए गए मोबाइल नंबर पर ओटीपी भेजा गया है,</string>
+    <string name="resend_otp">ओटीपी पुनः भेजें</string>
+
+
+<!--    PashuOption-->
+    <string name="str_pashu_jode">पशु जोड़ो</string>
+    <string name="str_filter">फिल्टर</string>
+    <string name="str_search">सर्च</string>
+    <string name="str_sabhi">सभी</string>
+    <string name="str_cow">गाय</string>
+    <string name="str_buffalo">भैंस</string>
+    <string name="str_byat">ब्यात</string>
+    <string name="str_byat_plus">ब्यात +</string>
+    <string name="str_data_not_fount">जानकारी उपलब्ध नहीं है।</string>
+    <string name="str_date">तारीख</string>
+    <string name="str_edit">एडिट</string>
+    <string name="str_animal_not_found">पशु मौजूद नही है।</string>
+    <string name="confirm_delete_pashu">क्या आप वाकई पशु डिलीट करना चाहते हैं ?</string>
+    <string name="confirm_delete_byat">क्या आप वाकई ब्यात डिलीट करना चाहते हैं ?</string>
+    <string name="deleting">डेटा डिलीट हो रहा है</string>
+    <string name="error_add_byat_number">ब्यात नंबर दर्ज करें</string>
+    <string name="txt_village_bull">गाँव बैल</string>
+    <string name="error_byat_birhtdate">ब्यात की जन्म तिथि दर्ज करें</string>
+    <string name="error_doctor_number_required">डॉक्टर नंबर दर्ज करें</string>
+    <string name="msg_add_byat">कृपया ब्यात ऐड करें ।</string>
+
+    <string name="title_byat_count">ब्यात संख्या</string>
+    <string name="title_byat_gender">बच्चा - महिला / पुरुष</string>
+    <string name="title_byat_birhtdate">ब्यात की जन्म तिथि</string>
+    <string name="title_tarbar_or_village_bull">गाँव बैल / तरबार नंबर</string>
+    <string name="title_doctor_number">डॉक्टर नंबर</string>
+    <string name="title_kisan_number">किसान नंबर</string>
+    <string name="msg_animal_blocked">यह पशु ब्लॉक किया गया है।</string>
+
+    <!--    DOODH MODULE-->
+    <string name="str_doodh">दूध</string>
+    <string name="str_doodh_plus">दूध +</string>
+    <string name="str_doodh_leaderboard">दूध लीडरबोर्ड</string>
+    <string name="title_pashu_doodh">पशु दूध</string>
+    <string name="title_tarbar_or_title_pashu_pita_number">गाँव बैल / पशु पिता नंबर</string>
+    <string name="hint_enter_doodh_data">उदाहरण: 2 / 20 / 2.0 / 20.45 / 20.456</string>
+    <string name="confirm_delete_doodh">क्या यह दूध की जानकारी गलत है?</string>
+    <string name="msg_add_doodh">कृपया दूध डेटा ऐड करें ।</string>
+    <string name="error_add_doodh">दूध डेटा ऐड करें ।</string>
+    <string name="error_add_pita_number">पिता का नंबर दर्ज करे</string>
+    <string name="error_12_digit_pita_number">12 अंकों का सही पिता का नंबर दर्ज करे</string>
+    <string name="error_enter_date">तारीख दर्ज करें</string>
+    <string name="error_invalid_doodh_format">सही दूध फॉर्मेट डालें</string>
+    <string name="str_rank">रैंक</string>
+    <string name="str_kilo">किलो</string>
+    <string name="str_pita_number">पशु पिता</string>
+    <string name="total_ranks">टोटल रैंक  :  %1$s</string>
+    <string name="total_ranks_zero">टोटल रैंक  :  0</string>
+    <string name="confirm_delete_doodh_data">क्या आप वाकई यह दूध डेटा डिलीट करना चाहते हैं ?</string>
+    <string name="error_add_kisan_number_or_pashu_number">किसान नंबर या पशु नंबर दर्ज करें</string>
+    <string name="str_april">अप्रैल</string>
+    <string name="str_march">मार्च</string>
+    <string name="str_se">से</string>
+    <string name="str_april_2024_to_march_2025">1 अप्रैल 2024 से 31 मार्च 2025</string>
+    <string name="str_year">साल</string>
+    <string name="hint_choose_year">साल चुनें</string>
+
+<!--    KISAN SEVA ANURODH-->
+    <string name="title_kisan_seva_anurodh">किसान सेवा अनुरोध</string>
+    <string name="error_choose_role">कृपया भूमिका चुनें</string>
+    <string name="txt_kisan">किसान</string>
+    <string name="txt_business">व्यवसायी</string>
+    <string name="txt_doctor">डॉक्टर</string>
+    <string name="txt_helper">सहायक</string>
+
+<!--BULL MODULE-->
+    <string name="str_sand">सांड</string>
+    <string name="str_bhaisa">भैसा</string>
+    <string name="title_bull">बुल</string>
+    <string name="title_bull_number">बुल नंबर</string>
+    <string name="title_bull_dob">बुल जन्मतिथि</string>
+    <string name="title_mother_per_day_milk">माँ का 1 दिन का दूध</string>
+    <string name="title_mother_305_days_milk">माँ का 305 दिन का दूध</string>
+    <string name="title_pidhi2_number">पीढ़ी 2</string>
+    <string name="title_pidhi3_number">पीढ़ी 3</string>
+    <string name="title_pidhi4_number">पीढ़ी 4</string>
+    <string name="title_pidhi5_number">पीढ़ी 5</string>
+    <string name="title_pidhi6_number">पीढ़ी 6</string>
+    <string name="title_add_bull_number">बुल नंबर दर्ज करें</string>
+    <string name="str_bull_not_found">बुल मौजूद नही है।</string>
+    <string name="total_bull">टोटल बुल  :  %1$s</string>
+
+<!--    Pashu Garbhavati Module-->
+    <string name="title_garbhavati">पशु गर्भवती</string>
+    <string name="title_child_birth_date">बच्चा देगा</string>
+    <string name="title_bijdan">बीजदान +</string>
+    <string name="msg_add_data">कृपया डेटा ऐड करें ।</string>
+    <string name="title_300_days_total_bijdan">300 दिन में बीजदान टोटल</string>
+    <string name="title_villagebull_or_bullnumber">गाँव बैल / बुल नंबर</string>
+    <string name="title_bijdan_date">बीजदान तारीख</string>
+    <string name="title_child_expected_birthdate">पशु बच्चा देगा</string>
+
+<!--FREE BIJDAN MODULE-->
+    <string name="title_free_bijdan">फ्री बीजदान</string>
+    <string name="title_bijdan_done">बीजदान किया</string>
+    <string name="total_kisan">टोटल किसान  :  %1$s</string>
+    <string name="title_bijdan_done_cnt">बीजदान किया  :  %1$s</string>
+    <string name="title_free_bijdan_cnt">फ्री बीजदान  :  %1$s</string>
+    <string name="hint_add_kisan_number">किसान नंबर दर्ज करें</string>
+
+<!--    KISAN MADAT-->
+    <string name="title_rs">रुपये</string>
+    <string name="total_helpers">टोटल मददगारी : %1$s</string>
+    <string name="total_money">टोटल रुपये : %1$s</string>
+    <string name="filter_more_money">ज्यादा रुपये</string>
+    <string name="filter_minimum_money">कम रुपये</string>
+    <string name="rank">रैंक</string>
+
+<!--    PASHU UPDATE-->
+    <string name="str_pashu_becha">पशु बेचा</string>
+    <string name="str_pashu_update">पशु अपडेट</string>
+    <string name="title_seller_number">व्यापारी नंबर</string>
+    <string name="error_enter_seller_mobile">कृपया व्यापारी का मोबाइल नंबर दर्ज करें</string>
+    <string name="error_invalid_seller_mobile">कृपया सही मोबाइल नंबर दर्ज करें</string>
+    <string name="confirm_delete_selling_details">क्या आप वाकई यह डेटा डिलीट करना चाहते हैं ?</string>
+
+
+
+    <!--     Arrays -->
+    <!--     AnimalType -->
+    <string-array name="CowTypes">
+        <item>जाति चुनें</item>
+        <item>गिर गाय</item>
+        <item>साहीवाल गाय</item>
+        <item>कांकरेज गाय</item>
+    </string-array>
+    <string-array name="BuffaloTypes">
+        <item>जाति चुनें</item>
+        <item>मुर्रा भैंस</item>
+        <item>मेहसानी भैंस</item>
+    </string-array>
+    <string-array name="Gender">
+        <item>लिंग चुनें</item>
+        <item>पुरुष</item>
+        <item>महिला</item>
+    </string-array>
+    <!--     States -->
+
+    <string-array name="states">
+        <item>राज्य चुनें</item>
+        <item>आंध्र प्रदेश</item>
+        <item>अरुणाचल प्रदेश</item>
+        <item>असम</item>
+        <item>बिहार</item>
+        <item>छत्तीसगढ़</item>
+        <item>गोवा</item>
+        <item>गुजरात</item>
+        <item>हरियाणा</item>
+        <item>हिमाचल प्रदेश</item>
+        <item>झारखंड</item>
+        <item>कर्नाटक</item>
+        <item>केरल</item>
+        <item>मध्य प्रदेश</item>
+        <item>महाराष्ट्र</item>
+        <item>मणिपुर</item>
+        <item>मेघालय</item>
+        <item>मिजोरम</item>
+        <item>नागालैंड</item>
+        <item>ओडिशा</item>
+        <item>पंजाब</item>
+        <item>राजस्थान</item>
+        <item>सिक्किम</item>
+        <item>तमिलनाडु</item>
+        <item>तेलंगाना</item>
+        <item>त्रिपुरा</item>
+        <item>उत्तर प्रदेश</item>
+        <item>उत्तराखंड</item>
+        <item>पश्चिम बंगाल</item>
+        <item>दादरा और नगर हवेली और दमन और दीव</item>
+        <item>लद्दाख</item>
+        <item>जम्मू और कश्मीर</item>
+        <item>चंडीगढ़</item>
+    </string-array>
+</resources>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/action_home"
+        android:icon="@drawable/home_new"
+        android:title="@string/txt_ghar" />
+
+    <item
+        android:id="@+id/action_details"
+        android:icon="@drawable/pashu_img"
+        android:title="@string/txt_pashu" />
+
+    <item
+        android:id="@+id/action_milk"
+        android:icon="@drawable/bn_pashu_doodh"
+        android:title="@string/txt_pashu_doodh" />
+
+    <item
+        android:id="@+id/action_profile"
+        android:icon="@drawable/profile_new"
+        android:title="@string/txt_profile" />
+
+</menu>

@@ -1,0 +1,28 @@
+<resources>
+
+    <dimen name="dimen_20dp">20dp</dimen>
+    <dimen name="dimen_5dp">5dp</dimen>
+    <dimen name="dimen_10dp">10dp</dimen>
+    <dimen name="dimen_40dp">40dp</dimen>
+    <dimen name="dimen_4dp">4dp</dimen>
+
+    <!--    Font Sizes-->
+
+    <dimen name="txt_8">8sp</dimen>
+    <dimen name="txt_10">10sp</dimen>
+    <dimen name="txt_12">12sp</dimen>
+    <dimen name="txt_14">14sp</dimen>
+    <dimen name="txt_16">16sp</dimen>
+    <dimen name="txt_18">18sp</dimen>
+    <dimen name="txt_20">20sp</dimen>
+    <dimen name="txt_22">22sp</dimen>
+    <dimen name="txt_24">24sp</dimen>
+    <dimen name="txt_26">26sp</dimen>
+
+    <!--    Screen Dimensions-->
+
+    <dimen name="marginLeft">24dp</dimen>
+    <dimen name="marginRight">24dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+
+</resources>

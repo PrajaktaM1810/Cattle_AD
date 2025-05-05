@@ -1,0 +1,448 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp">
+
+            <Button
+                android:id="@+id/Delete"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:layout_gravity="right"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/big_button"
+                android:backgroundTint="@color/delete_option_color"
+                android:clipToOutline="true"
+                android:text="@string/delete_animal_profile"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:visibility="gone" />
+
+            <!--            Pashu Type-->
+
+            <TextView
+                android:id="@+id/title_pashu_prakar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/title_pashu_prakar"
+                android:textColor="@color/black"
+                android:textSize="@dimen/txt_12" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/bg_form"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/AnimalType"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:layout_toLeftOf="@+id/cowImg"
+                    android:background="@color/bgColor"
+                    android:enabled="false"
+                    android:focusable="false"
+                    android:gravity="center_vertical"
+                    android:paddingStart="10dp"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/txt_14"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/cowImg"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/cowImg"
+                    android:layout_width="50dp"
+                    android:layout_height="35dp"
+                    android:layout_gravity="center_vertical"
+                    android:contentDescription="Pashu Number Image"
+                    android:src="@drawable/cow_img"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/buffaloImg"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/buffaloImg"
+                    android:layout_width="50dp"
+                    android:layout_height="35dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="3dp"
+                    android:contentDescription="Pashu Number Image"
+                    android:src="@drawable/buffalo_img"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!--            Pashu Vyapari Number-->
+
+            <TextView
+                android:id="@+id/title_seller_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:text="@string/title_seller_number"
+                android:textColor="@color/black"
+                android:textSize="@dimen/txt_12" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/bg_form"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/SellerMobileNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/bgColor"
+                    android:gravity="center_vertical"
+                    android:inputType="number"
+                    android:maxLength="10"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/txt_14" />
+            </LinearLayout>
+
+            <!--            sellingdate-->
+
+            <TextView
+                android:id="@+id/title_byat_birhtdate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:text="@string/str_date"
+                android:textColor="@color/black"
+                android:textSize="@dimen/txt_12" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/bg_form"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/calenderImg"
+                    android:layout_width="60dp"
+                    android:layout_height="28dp"
+                    android:layout_gravity="center_vertical"
+                    android:contentDescription="Pashu Number Image"
+                    android:src="@drawable/calender_img" />
+
+                <EditText
+                    android:id="@+id/SellingDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/bgColor"
+                    android:enabled="false"
+                    android:focusable="false"
+                    android:gravity="center_vertical"
+                    android:inputType="number"
+                    android:maxLength="20"
+                    android:paddingRight="10dp"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/txt_14" />
+            </LinearLayout>
+
+            <!--            FarmerNumber-->
+
+            <TextView
+                android:id="@+id/title_kisan_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:text="@string/title_kisan_number"
+                android:textColor="@color/black"
+                android:textSize="@dimen/txt_12" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/bg_form"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="28dp"
+                    android:layout_gravity="center_vertical"
+                    android:contentDescription="Pashu Number Image"
+                    android:src="@drawable/profile_new" />
+
+                <EditText
+                    android:id="@+id/KisanMobileNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/bgColor"
+                    android:enabled="false"
+                    android:focusable="false"
+                    android:gravity="center_vertical"
+                    android:inputType="number"
+                    android:maxLength="20"
+                    android:paddingRight="10dp"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/txt_14" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/txtState"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:text="@string/title_state"
+                android:textColor="@color/black"
+                android:textSize="@dimen/txt_12" />
+
+            <LinearLayout
+                android:id="@+id/llstate"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/bg_form"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="25dp"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/map_img" />
+
+                <EditText
+                    android:id="@+id/KisanState"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="10dp"
+                    android:background="@color/bgColor"
+                    android:enabled="false"
+                    android:focusable="false"
+                    android:gravity="center_vertical"
+                    android:inputType="text"
+                    android:maxLength="20"
+                    android:singleLine="true"
+                    android:textColor="#CC000000"
+                    android:textSize="@dimen/txt_14" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/txtJilha"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:text="@string/title_jilha"
+                android:textColor="@color/black"
+                android:textSize="@dimen/txt_12" />
+
+            <LinearLayout
+                android:id="@+id/lljilha"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/bg_form"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/address_icon" />
+
+                <EditText
+                    android:id="@+id/KisanJilha"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="10dp"
+                    android:background="@color/bgColor"
+                    android:enabled="false"
+                    android:focusable="false"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/txt_14" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/txtTahsil"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:text="@string/title_tahsil"
+                android:textColor="@color/black"
+                android:textSize="@dimen/txt_12" />
+
+            <LinearLayout
+                android:id="@+id/lltahsil"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/bg_form"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/address_icon" />
+
+                <EditText
+                    android:id="@+id/KisanTahsil"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="10dp"
+                    android:background="@color/bgColor"
+                    android:enabled="false"
+                    android:focusable="false"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/txt_14" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/txtVillage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:text="@string/title_village"
+                android:textColor="@color/black"
+                android:textSize="@dimen/txt_12" />
+
+            <LinearLayout
+                android:id="@+id/llvillage"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/bg_form"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/address_icon" />
+
+                <EditText
+                    android:id="@+id/KisanVillage"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="10dp"
+                    android:background="@color/bgColor"
+                    android:enabled="false"
+                    android:focusable="false"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/txt_14" />
+            </LinearLayout>
+
+            <!--            Password-->
+
+            <TextView
+                android:id="@+id/title_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:text="@string/title_password"
+                android:textColor="@color/black"
+                android:textSize="@dimen/txt_12" />
+
+            <LinearLayout
+                android:id="@+id/PasswordLayout"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/bg_form"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="28dp"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/password_img" />
+
+                <EditText
+                    android:id="@+id/KisanPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/bgColor"
+                    android:gravity="center_vertical"
+                    android:inputType="numberPassword"
+                    android:maxLength="4"
+                    android:paddingRight="10dp"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/txt_14" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/submit"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="40dp"
+                android:layout_marginBottom="40dp"
+                android:background="@drawable/big_button"
+                android:clipToOutline="true"
+                android:text="@string/save"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+

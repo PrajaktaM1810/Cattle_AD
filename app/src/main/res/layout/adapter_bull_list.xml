@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="4dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:orientation="vertical">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/bullImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="180dp"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitCenter"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/bullCaste"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/imground"
+                    android:backgroundTint="#E6FFFFFF"
+                    android:padding="5dp"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/txt_10"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <!-- First LinearLayout -->
+            <LinearLayout
+                android:id="@+id/linearLayout1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1.10"
+                android:orientation="vertical"
+                tools:layout_editor_absoluteX="16dp"
+                tools:layout_editor_absoluteY="16dp">
+
+                <TextView
+                    android:id="@+id/bullNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/txt_12"
+                    android:textColor="@color/black"
+                    android:inputType="textMultiLine" />
+
+                <TextView
+                    android:id="@+id/bullBirthDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:inputType="textMultiLine"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/txt_12" />
+
+
+                <TextView
+                    android:id="@+id/bullMotherNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:inputType="textMultiLine"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/txt_12" />
+
+                <TextView
+                    android:id="@+id/motherPerDayMilk"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:textSize="@dimen/txt_12"
+                    android:inputType="textMultiLine"
+                    android:textColor="@color/black"/>
+
+                <TextView
+                    android:id="@+id/mother305daysMilk"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:inputType="textMultiLine"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/txt_12" />
+            </LinearLayout>
+
+            <!-- Second LinearLayout -->
+            <LinearLayout
+                android:id="@+id/linearLayout2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.8"
+                android:gravity="left"
+                android:layout_marginLeft="5dp"
+                android:orientation="vertical"
+                tools:layout_editor_absoluteX="222dp"
+                tools:layout_editor_absoluteY="16dp">
+
+                <!-- Child Views -->
+                <TextView
+                    android:id="@+id/secondPidhiNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="textMultiLine"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/txt_12" />
+
+                <TextView
+                    android:id="@+id/thirdPidhiNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:inputType="textMultiLine"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/txt_12" />
+
+                <TextView
+                    android:id="@+id/forthPidhiNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:inputType="textMultiLine"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/txt_12" />
+
+                <TextView
+                    android:id="@+id/fifthPidhiNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:inputType="textMultiLine"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/txt_12" />
+
+                <TextView
+                    android:id="@+id/sixthPidhiNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:inputType="textMultiLine"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/txt_12" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>
