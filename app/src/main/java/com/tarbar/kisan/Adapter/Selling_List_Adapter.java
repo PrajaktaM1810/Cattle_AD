@@ -13,17 +13,21 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.tarbar.kisan.Activities.LoadFormFragments;
 import com.tarbar.kisan.R;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 public class Selling_List_Adapter extends RecyclerView.Adapter<Selling_List_Adapter.PashuViewHolder> {
-    private List<Map<String, String>> bullData;
+    private List<Map<String, String>> Data;
     private final Context context;
 
-    public Selling_List_Adapter(Context context, List<Map<String, String>> bullData) {
+    public Selling_List_Adapter(Context context, List<Map<String, String>> Data) {
         this.context = context;
-        this.bullData = new ArrayList<>(bullData);
+        this.Data = new ArrayList<>(Data);
     }
 
     @NonNull
@@ -35,19 +39,27 @@ public class Selling_List_Adapter extends RecyclerView.Adapter<Selling_List_Adap
 
     @Override
     public void onBindViewHolder(@NonNull PashuViewHolder holder, int position) {
-        Map<String, String> animalInfo = bullData.get(position);
+        Map<String, String> Info = Data.get(position);
 
-        String sellingId = animalInfo.get("id");
-        String sellerNumber = animalInfo.get("seller_number");
-        String sellingDate = animalInfo.get("selling_date");
-        String pashuType = animalInfo.get("pashu_type");
+        String sellingId = Info.get("id");
+        String sellerNumber = Info.get("seller_number");
+        String sellingDate = Info.get("selling_date");
+        String pashuType = Info.get("pashu_type");
 
         holder.SellerMobileNumber.setText(getValueOrDash(sellerNumber));
 
         if (sellingDate == null || sellingDate.trim().isEmpty() || sellingDate.equals("0000-00-00")) {
             holder.SellingDate.setText("-");
         } else {
-            holder.SellingDate.setText(sellingDate);
+            try {
+                SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+                SimpleDateFormat outputFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+                Date date = inputFormat.parse(sellingDate);
+                String formattedDate = outputFormat.format(date);
+                holder.SellingDate.setText(formattedDate);
+            } catch (ParseException e) {
+                holder.SellingDate.setText(sellingDate);
+            }
         }
 
         if (pashuType != null) {
@@ -81,11 +93,11 @@ public class Selling_List_Adapter extends RecyclerView.Adapter<Selling_List_Adap
 
     @Override
     public int getItemCount() {
-        return bullData.size();
+        return Data.size();
     }
 
     public void updateList(List<Map<String, String>> newBullData) {
-        this.bullData = new ArrayList<>(newBullData);
+        this.Data = new ArrayList<>(newBullData);
         notifyDataSetChanged();
     }
 

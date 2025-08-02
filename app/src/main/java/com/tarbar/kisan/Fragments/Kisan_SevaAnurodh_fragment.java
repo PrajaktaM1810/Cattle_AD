@@ -1,9 +1,6 @@
 package com.tarbar.kisan.Fragments;
 
 import static com.tarbar.kisan.Helper.constant.FETCH_PROFILE;
-import static com.tarbar.kisan.Helper.constant.PROFILE_IMGAE_PATH;
-import static com.tarbar.kisan.Helper.constant.USER_ROLE_UPDATE;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
@@ -43,6 +40,7 @@ import com.tarbar.kisan.Activities.SplashActivity;
 import com.tarbar.kisan.Helper.ApiUtils;
 import com.tarbar.kisan.Helper.Iconstant;
 import com.tarbar.kisan.Helper.SharedPreferenceManager;
+import com.tarbar.kisan.Helper.constant;
 import com.tarbar.kisan.R;
 
 import org.json.JSONArray;
@@ -243,7 +241,7 @@ public class Kisan_SevaAnurodh_fragment extends Fragment {
             return;
         }
 
-        StringRequest postRequest = new StringRequest(Request.Method.POST, USER_ROLE_UPDATE,
+        StringRequest postRequest = new StringRequest(Request.Method.POST, constant.UPDATE_USER_ROLE,
                 response -> {
                     dialog.dismiss();
                     Log.d("UpdateAnimalAPI", response);
@@ -268,8 +266,8 @@ public class Kisan_SevaAnurodh_fragment extends Fragment {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
-                params.put("userid", userid);
-                params.put("user_role", userRole);
+                params.put("id", userid);
+                params.put("is_businessman", userRole);
                 return params;
             }
         };

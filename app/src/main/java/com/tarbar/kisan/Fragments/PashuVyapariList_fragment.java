@@ -1,8 +1,6 @@
 package com.tarbar.kisan.Fragments;
 
 import android.app.ProgressDialog;
-import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,7 +12,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatEditText;
@@ -28,21 +25,15 @@ import com.android.volley.ParseError;
 import com.android.volley.ServerError;
 import com.android.volley.TimeoutError;
 import com.tarbar.kisan.Activities.LoadFilterFragments;
-import com.tarbar.kisan.Activities.MainActivity;
 import com.tarbar.kisan.Adapter.PashuVyapariList_Adapter;
 import com.tarbar.kisan.Helper.ApiUtils;
 import com.tarbar.kisan.Helper.Iconstant;
 import com.tarbar.kisan.Helper.SharedPreferenceManager;
 import com.tarbar.kisan.Helper.constant;
 import com.tarbar.kisan.R;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import android.util.Log;
 import android.widget.Toast;
@@ -127,7 +118,6 @@ public class PashuVyapariList_fragment extends Fragment {
                     cancelIcon.setVisibility(View.GONE);
                 }
             }
-
             @Override
             public void afterTextChanged(Editable s) {
                 String searchText = s.toString().trim();
@@ -270,7 +260,6 @@ public class PashuVyapariList_fragment extends Fragment {
                 filteredData.add(item);
             }
         }
-
         if (filteredData.isEmpty()) {
             recyclerView.setVisibility(View.GONE);
             id_data_not_found.setVisibility(View.VISIBLE);
@@ -278,7 +267,6 @@ public class PashuVyapariList_fragment extends Fragment {
             recyclerView.setVisibility(View.VISIBLE);
             id_data_not_found.setVisibility(View.GONE);
         }
-
         adapter.updateList(filteredData);
         totalRecords.setText(getString(R.string.total_ranks, String.valueOf(filteredData.size())));
     }

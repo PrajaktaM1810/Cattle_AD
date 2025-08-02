@@ -239,7 +239,7 @@
     <string name="gallary_option">गैलरी</string>
     <string name="remove_img_option">हटाएं</string>
     <string name="camera_not_available">कैमरा उपलब्ध नहीं है</string>
-
+    <string name="removing_profile_picture">प्रोफाइल फोटो हटाया जा रहा है</string>
 
     <!--     OTP Verification -->
     <string name="enter_otp">ओटीपी दर्ज करें</string>
@@ -324,7 +324,7 @@
     <string name="title_bull_number">बुल नंबर</string>
     <string name="title_bull_dob">बुल जन्मतिथि</string>
     <string name="title_mother_per_day_milk">माँ का 1 दिन का दूध</string>
-    <string name="title_mother_305_days_milk">माँ का 305 दिन का दूध</string>
+    <string name="title_mother_305_days_milk">माँ के दूध का फैट</string>
     <string name="title_pidhi2_number">पीढ़ी 2</string>
     <string name="title_pidhi3_number">पीढ़ी 3</string>
     <string name="title_pidhi4_number">पीढ़ी 4</string>
@@ -359,15 +359,20 @@
     <string name="filter_more_money">ज्यादा रुपये</string>
     <string name="filter_minimum_money">कम रुपये</string>
     <string name="rank">रैंक</string>
+    <string name="search_rank">रैंक नंबर दर्ज करें</string>
+    <string name="str_join_as_helper">सहायक जुड़े</string>
+    <string name="cancel_role">भूमिका रद्द करें</string>
+    <string name="confirm_delete_helper_role">क्या आप वाकई सहायक भूमिका रद्द करना चाहते हैं ?</string>
+    <string name="msg_joined_As_helper">रैंक नंबर दर्ज करें</string>
+    <string name="msg_remove_from_helper">सहायक जुड़े</string>
 
-<!--    PASHU UPDATE-->
+    <!--    PASHU UPDATE-->
     <string name="str_pashu_becha">पशु बेचा</string>
     <string name="str_pashu_update">पशु अपडेट</string>
     <string name="title_seller_number">व्यापारी नंबर</string>
     <string name="error_enter_seller_mobile">कृपया व्यापारी का मोबाइल नंबर दर्ज करें</string>
     <string name="error_invalid_seller_mobile">कृपया सही मोबाइल नंबर दर्ज करें</string>
     <string name="confirm_delete_selling_details">क्या आप वाकई यह डेटा डिलीट करना चाहते हैं ?</string>
-
 
 <!--    PASHU VYAPARI-->
     <string name="str_pashu_vyapari">पशु व्यापारी</string>
@@ -377,9 +382,13 @@
     <string name="str_lowest_selling">कम बेचा</string>
     <string name="str_join_as_seller">व्यापारी जुड़े</string>
     <string name="searchkisannumbertxt">किसान नंबर सर्च करें..</string>
+    <string name="searchsellernumbertxt">व्यापारी नंबर सर्च करें..</string>
     <string name="str_vyapari_number">व्यापारी नंबर  :  %1$s</string>
     <string name="confirm_businessman_status_change">क्या आप व्यापारी के रूप में पंजीकरण करना चाहते हैं?</string>
-
+    <string name="confirm_delete_business_person_role">क्या आप वाकई व्यापारी भूमिका रद्द करना चाहते हैं ?</string>
+    <string name="do_call_txt">कॉल करें</string>
+    <string name="do_message_txt">मैसेज करें</string>
+    <string name="error_valid_seller_number">कृपया सही व्यापारी मोबाइल नंबर दर्ज करें</string>
 
     <!--     Arrays -->
     <!--     AnimalType -->

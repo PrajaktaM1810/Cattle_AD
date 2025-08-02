@@ -2,7 +2,6 @@ package com.tarbar.kisan.Fragments;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
-import static com.tarbar.kisan.Helper.constant.GET_ANIMAL_LIST;
 import static com.tarbar.kisan.Helper.constant.GET_BULL_LIST;
 
 import android.app.AlertDialog;

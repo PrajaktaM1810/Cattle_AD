@@ -11,6 +11,7 @@ public class constant {
     public static final String BULL_IMAGES_PATH = "https://tarbargroup.in/assets/bull_imgs/";
 
     static String BASE_URL = "https://tarbargroup.in/api/";
+
     public static final String IMGAE_PATH = "https://tarbargroup.in/assets/images/";
 
     static String SEND_OTP = BASE_URL+"auth/otp_request";
@@ -44,7 +45,7 @@ public class constant {
 
 //    REGISTRATION
     public static String REGISTER = BASE_URL + "auth/register";
-    public static String GET_STATES = BASE_URL + "users/ax_getStates";
+    public static String GET_STATES = BASE_URL + "auth/getAddress";
 
 //    VerifyOtp
     public static String VERIFY_OTP = BASE_URL + "auth/verify_otp";
@@ -64,25 +65,25 @@ public class constant {
 
 //  Profile Fragment
     public static final String PROFILE_IMGAE_PATH =  "https://tarbargroup.in/uploads/users/";
-    public static String FETCH_PROFILE = BASE_URL + "users/profile";
-    public static String UPDATE_PROFILE = BASE_URL + "users/update_profile";
+    public static String FETCH_PROFILE = BASE_URL + "users/getUserProfile";
+    public static String UPDATE_PROFILE = BASE_URL + "users/updateUserProfile";
     public static String DELETE_PROFILE_PICTURE = BASE_URL + "users/deleteProfilePicture";
 
 //  UserRequest
-//    public static String USER_REQUEST = BASE_URL + "users/updateUserReq";
- public static String USER_ROLE_UPDATE = BASE_URL + "users/ax_user_role_update";
+    public static String GET_USER_ROLES = BASE_URL + "users/getUserRoles";
+    public static String UPDATE_USER_ROLE = BASE_URL + "users/updateUserRole";
 
 //   PASHU
-    public static String GET_ANIMAL_LIST = BASE_URL + "animals/ax_get_animal_list";
+    public static String GET_ANIMAL_LIST = BASE_URL + "animals/get_animal_list";
     public static String ADD_ANIMAL = BASE_URL + "animals/register_animal";
-    public static String GET_ANIMAL_DATA = BASE_URL + "animals/ax_get_animal_data";
-    public static String UPDATE_ANIMAL = BASE_URL + "animals/ax_update_animal";
+    public static String GET_ANIMAL_DATA = BASE_URL + "animals/get_animal_data";
+    public static String UPDATE_ANIMAL = BASE_URL + "animals/update_animal_data";
     public static String DELETE_ANIMAL = BASE_URL + "animals/delete_animal";
 
-    public static String GET_BYAT_LIST = BASE_URL + "animals/ax_get_byat_list";
-    public static String ADD_BYAT = BASE_URL + "animals/ax_register_byat";
-    public static String GET_BYAT_DATA = BASE_URL + "animals/ax_get_byat_data";
-    public static String UPDATE_BYAT_DATA = BASE_URL + "animals/ax_update_byat";
+    public static String GET_BYAT_LIST = BASE_URL + "animals/get_byat_list";
+    public static String ADD_BYAT = BASE_URL + "animals/register_byat";
+    public static String GET_BYAT_DATA = BASE_URL + "animals/get_byat_data";
+    public static String UPDATE_BYAT_DATA = BASE_URL + "animals/update_byat";
     public static String DELETE_BYAT = BASE_URL + "animals/ax_delete_byat";
 
 //  DOODH MODULE
@@ -94,7 +95,7 @@ public class constant {
     public static String DOODH_LEADERBOARD_LIST = BASE_URL + "animals/ax_get_leaderboard_list";
 
 //  BULL MODULE
-    public static String GET_BULL_LIST = BASE_URL + "animals/ax_get_bull_list";
+    public static String GET_BULL_LIST = BASE_URL + "animals/getBullList";
 
 //    PASHU GARBHAVATI MODULE
     public static String GET_BIJDAN_DETAILS = BASE_URL + "animals/ax_get_bijadan_details";
@@ -106,23 +107,19 @@ public class constant {
 
 
 //    PASHU UPDATE
-
     public static String GET_SELLING_LIST = BASE_URL + "animals/get_selling_list";
-    public static String ADD_SELLING_DETAILS = BASE_URL + "animals/add_selling_details";
+    public static String ADD_SELLING_DETAILS = BASE_URL + "animals/addSellingDetails";
     public static String GET_PARTICULAR_SELLING_DETAILS = BASE_URL + "animals/get_particular_selling_details";
     public static String UPDATE_PARTICULAR_SELLING_DETAILS = BASE_URL + "animals/update_particular_selling_details";
     public static String DELETE_PARTICULAR_SELLING_DETAILS = BASE_URL + "animals/delete_particular_selling_details";
 
-
     // KISAN MADAT
-   public static String GET_KISAN_MADAT_LIST = BASE_URL + "users/ax_get_user_list";
-
+   public static String GET_KISAN_MADAT_LIST = BASE_URL + "users/get_helpers_list";
 
 //   PASHU VYAPARI
     public static String GET_SELLING_REPORT = BASE_URL + "animals/get_selling_report";
     public static String GET_USER_SELLING_HISTORY = BASE_URL + "animals/get_user_selling_history";
-    public static String GET_USER_VYAPARI_STATUS = BASE_URL + "animals/get_user_businessman_status";
-    public static String UPDATE_USER_VYAPARI_STATUS = BASE_URL + "animals/update_user_businessman_status";
+
 }
 
 

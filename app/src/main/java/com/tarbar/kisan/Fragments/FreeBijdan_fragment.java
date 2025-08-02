@@ -290,7 +290,6 @@ public class FreeBijdan_fragment extends Fragment {
 
     private void applyFilter(List<Map<String, String>> sourceList, String typeFilter) {
         filteredData.clear();
-
         for (Map<String, String> item : sourceList) {
             String type = item.get("type");
             if (typeFilter.isEmpty() || (type != null && type.equalsIgnoreCase(typeFilter))) {

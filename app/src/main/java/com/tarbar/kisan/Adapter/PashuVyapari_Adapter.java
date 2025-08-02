@@ -1,77 +1,27 @@
 package com.tarbar.kisan.Adapter;
 
-import static com.tarbar.kisan.Helper.constant.GET_DOODH_LIST;
-import static com.tarbar.kisan.Helper.constant.PROFILE_IMGAE_PATH;
-
-import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.content.Context;
-
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.Color;
-import android.graphics.Typeface;
-import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.android.volley.AuthFailureError;
-import com.android.volley.DefaultRetryPolicy;
-import com.android.volley.NetworkError;
-import com.android.volley.NoConnectionError;
-import com.android.volley.ParseError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.ServerError;
-import com.android.volley.TimeoutError;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-import com.squareup.picasso.Picasso;
 import com.tarbar.kisan.Activities.LoadFilterFragments;
-import com.tarbar.kisan.Activities.LoadFragments;
-import com.tarbar.kisan.Helper.Iconstant;
-import com.tarbar.kisan.Helper.SharedPreferenceManager;
-import com.tarbar.kisan.Helper.constant;
 import com.tarbar.kisan.R;
-
-import java.io.ByteArrayOutputStream;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collections;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
-
 import android.util.Log;
 import android.widget.Toast;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import de.hdodenhof.circleimageview.CircleImageView;
-
 import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
+
 public class PashuVyapari_Adapter extends RecyclerView.Adapter<PashuVyapari_Adapter.ViewHolder> {
     private List<Map<String, String>> data;
     private Context context;
@@ -110,6 +60,18 @@ public class PashuVyapari_Adapter extends RecyclerView.Adapter<PashuVyapari_Adap
 
         String mobileNumber = getValidText(animalInfo.get("kisanNumber"));
 
+        holder.txtSellingTotal.setOnClickListener(v -> {
+            Animation animation = AnimationUtils.loadAnimation(context, R.anim.click_animation);
+            v.startAnimation(animation);
+            Intent intent = new Intent(holder.itemView.getContext(), LoadFilterFragments.class);
+            intent.putExtra("PashuVyapariList_fragment", true);
+            intent.putExtra("userId", userId);
+            intent.putExtra("kisanmobileNumber", mobileNumber);
+            Log.d("PashuVyapari_Adapter", "userId: " + userId);
+            Log.d("PashuVyapari_Adapter", "kisanmobileNumber: " + mobileNumber);
+            holder.itemView.getContext().startActivity(intent);
+        });
+
         holder.imgArrow.setOnClickListener(v -> {
             Animation animation = AnimationUtils.loadAnimation(context, R.anim.click_animation);
             v.startAnimation(animation);
@@ -121,6 +83,7 @@ public class PashuVyapari_Adapter extends RecyclerView.Adapter<PashuVyapari_Adap
             Log.d("PashuVyapari_Adapter", "kisanmobileNumber: " + mobileNumber);
             holder.itemView.getContext().startActivity(intent);
         });
+
 
         holder.imgCall.setOnClickListener(v -> {
             Animation animation = AnimationUtils.loadAnimation(context, R.anim.click_animation);
@@ -182,9 +145,11 @@ public class PashuVyapari_Adapter extends RecyclerView.Adapter<PashuVyapari_Adap
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView txtRank,txtNumber, txtState, txtTahsil, txtJilha, txtVillage;
+        TextView txtRank, txtNumber, txtState, txtTahsil, txtJilha, txtVillage;
         TextView txtName, txtFatherName, txtCaste, txtSellingTotal;
-        ImageView imgCall, imgWhatsapp, imgArrow;
+        LinearLayout imgCall, imgWhatsapp;
+        ImageView imgArrow;
+
         public ViewHolder(View itemView) {
             super(itemView);
             txtRank = itemView.findViewById(R.id.txtRank);
@@ -197,7 +162,6 @@ public class PashuVyapari_Adapter extends RecyclerView.Adapter<PashuVyapari_Adap
             txtName = itemView.findViewById(R.id.txtName);
             txtNumber = itemView.findViewById(R.id.txtNumber);
             txtSellingTotal = itemView.findViewById(R.id.txtSellingTotal);
-
             imgCall = itemView.findViewById(R.id.imgCall);
             imgWhatsapp = itemView.findViewById(R.id.imgWhatsapp);
             imgArrow = itemView.findViewById(R.id.imgArrow);

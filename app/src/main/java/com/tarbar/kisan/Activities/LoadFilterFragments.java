@@ -37,9 +37,9 @@ import android.widget.TextView;
 public class LoadFilterFragments extends AppCompatActivity {
     FrameLayout mainContainer;
 
-    public LinearLayout button1, button2, button3;
-    public TextView btn1txt,btn2txt,btn3txt,title;
-    public ImageView iconbutton1,iconbutton2,iconbutton3;
+    public LinearLayout button1, button2, button3,button4;
+    public TextView btn1txt,btn2txt,btn3txt,btn4txt,title;
+    public ImageView iconbutton1,iconbutton2,iconbutton3,iconbutton4;
     public ImageView back;
 
     public CardView cardView;
@@ -168,6 +168,7 @@ public class LoadFilterFragments extends AppCompatActivity {
         button1 = findViewById(R.id.button1);
         button2 = findViewById(R.id.button2);
         button3 = findViewById(R.id.button3);
+        button4 = findViewById(R.id.button4);
 
         title = findViewById(R.id.title);
         back = findViewById(R.id.back);
@@ -178,10 +179,12 @@ public class LoadFilterFragments extends AppCompatActivity {
         iconbutton1 = findViewById(R.id.iconbutton1);
         iconbutton2 = findViewById(R.id.iconbutton2);
         iconbutton3 = findViewById(R.id.iconbutton3);
+        iconbutton4 = findViewById(R.id.iconbutton4);
 
         btn1txt = findViewById(R.id.btn1txt);
         btn2txt = findViewById(R.id.btn2txt);
         btn3txt = findViewById(R.id.btn3txt);
+        btn4txt = findViewById(R.id.btn4txt);
 
         cardView = findViewById(R.id.cardView);
         swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);

@@ -1,24 +1,18 @@
 package com.tarbar.kisan.Fragments;
 
 import static android.view.View.GONE;
-
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.Editable;
-import android.text.InputType;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -52,9 +46,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -74,7 +68,7 @@ import org.json.JSONObject;
 public class PashuVyapari_fragment extends Fragment {
     private SharedPreferenceManager sharedPrefMgr;
     ProgressDialog dialog;
-    String mobileNumber,kisanId;
+    String mobileNumber, kisanId,Password;
     TextView totalVyapari, id_data_not_found, dateRange;
     RecyclerView recyclerView;
     PashuVyapari_Adapter adapter;
@@ -87,6 +81,9 @@ public class PashuVyapari_fragment extends Fragment {
     boolean showHighest = false;
     boolean showLowest = false;
     private LoadFilterFragments loadFilterFragments;
+    String statusStr = "";
+    String messageStr = "";
+    String isBusinessman = "";
 
     @Nullable
     @Override
@@ -97,6 +94,7 @@ public class PashuVyapari_fragment extends Fragment {
         sharedPrefMgr.connectDB();
         kisanId = sharedPrefMgr.getString(Iconstant.userid);
         mobileNumber = sharedPrefMgr.getString(Iconstant.mobile);
+        Password = sharedPrefMgr.getString(Iconstant.password);
         sharedPrefMgr.closeDB();
 
         totalVyapari = view.findViewById(R.id.totalVyapari);
@@ -123,7 +121,6 @@ public class PashuVyapari_fragment extends Fragment {
                 cancelIcon.setVisibility(s.length() > 0 ? View.VISIBLE : View.GONE);
                 filterData(s.toString());
             }
-
             @Override
             public void afterTextChanged(Editable s) {}
         });
@@ -141,12 +138,13 @@ public class PashuVyapari_fragment extends Fragment {
         getSellingList(null, null);
 
         if (loadFilterFragments != null) {
-            loadFilterFragments.button3.setVisibility(GONE);
+            loadFilterFragments.button1.setVisibility(View.VISIBLE);
+            loadFilterFragments.button2.setVisibility(View.GONE);
+            loadFilterFragments.button4.setVisibility(View.GONE);
             loadFilterFragments.iconbutton1.setBackgroundResource(R.drawable.icon_calender);
-            loadFilterFragments.iconbutton2.setBackgroundResource(R.drawable.pashu_vyapari);
 
             loadFilterFragments.btn1txt.setText(R.string.str_year);
-            loadFilterFragments.btn2txt.setText(R.string.str_join_as_seller);
+            loadFilterFragments.btn3txt.setText(R.string.str_join_as_seller);
 
             loadFilterFragments.swipeRefreshLayout.setOnRefreshListener(() -> {
                 getSellingList(null, null);
@@ -178,8 +176,238 @@ public class PashuVyapari_fragment extends Fragment {
                     resetOtherButtonColors(loadFilterFragments.button2);
                 }
             });
+
+            loadFilterFragments.button3.setOnClickListener(v -> {
+                Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.click_animation);
+                v.startAnimation(animation);
+                changeButtonAndTextColor(loadFilterFragments.button3, loadFilterFragments.btn3txt);
+                resetOtherButtonColors(loadFilterFragments.button3);
+                joinAsBusinessPersonMessageDialog();
+            });
+
+            loadFilterFragments.button4.setOnClickListener(v -> {
+                Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.click_animation);
+                v.startAnimation(animation);
+                changeButtonAndTextColor(loadFilterFragments.button4, loadFilterFragments.btn4txt);
+                resetOtherButtonColors(loadFilterFragments.button4);
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setMessage(getString(R.string.confirm_delete_business_person_role));
+                builder.setNegativeButton(getString(R.string.no), (dialog, which) -> {
+                    resetOtherButtonColors(loadFilterFragments.button4);
+                    resetOtherButtonColors(loadFilterFragments.button2);
+                    resetOtherButtonColors(loadFilterFragments.button3);
+                    resetOtherButtonColors(loadFilterFragments.button1);
+                });
+                builder.setPositiveButton(getString(R.string.yes), (dialog, which) -> {
+                    resetOtherButtonColors(loadFilterFragments.button4);
+                    resetOtherButtonColors(loadFilterFragments.button2);
+                    resetOtherButtonColors(loadFilterFragments.button3);
+                    resetOtherButtonColors(loadFilterFragments.button1);
+                    dialog.dismiss();
+                    messageDialog();
+                });
+                AlertDialog alert = builder.create();
+                alert.setOnShowListener(dialogInterface -> {
+                    alert.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.BLACK);
+                    alert.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.BLACK);
+                });
+                alert.show();
+            });
         }
+        getBusinesPersonStatus(kisanId);
         return view;
+    }
+
+    private void joinAsBusinessPersonMessageDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.lyt_forget_password, null);
+        builder.setView(dialogView);
+        AlertDialog dialog = builder.create();
+        EditText passwordEditText = dialogView.findViewById(R.id.Password);
+        TextView textGetPassword = dialogView.findViewById(R.id.textGetPassword);
+        LinearLayout passwordLayout = dialogView.findViewById(R.id.password_layout);
+        LinearLayout mobileLayout = dialogView.findViewById(R.id.mobileLayout);
+        LinearLayout pashuNumber = dialogView.findViewById(R.id.pashuNumber);
+        passwordLayout.setVisibility(View.VISIBLE);
+        mobileLayout.setVisibility(View.GONE);
+        pashuNumber.setVisibility(View.GONE);
+
+        textGetPassword.setText(R.string.str_join_as_seller);
+
+        dialogView.findViewById(R.id.textGetPassword).setOnClickListener(v -> {
+            String pass = passwordEditText.getText().toString();
+
+            if (pass.isEmpty()) {
+                passwordEditText.setError(getString(R.string.enter_password_number));
+            } else if (pass.length() < 4) {
+                passwordEditText.setError(getString(R.string.enter_correct_password));
+            } else if (!pass.equals(Password)) {
+                Toast.makeText(requireContext(), R.string.error_password_not_matching, Toast.LENGTH_SHORT).show();
+            } else {
+                dialog.dismiss();
+                updateUserBusinessStatus(kisanId, "1");
+            }
+            resetOtherButtonColors(loadFilterFragments.button4);
+            resetOtherButtonColors(loadFilterFragments.button2);
+            resetOtherButtonColors(loadFilterFragments.button3);
+            resetOtherButtonColors(loadFilterFragments.button1);
+        });
+        dialogView.findViewById(R.id.textCancel).setOnClickListener(v -> {
+            dialog.dismiss();
+            resetOtherButtonColors(loadFilterFragments.button4);
+            resetOtherButtonColors(loadFilterFragments.button2);
+            resetOtherButtonColors(loadFilterFragments.button3);
+            resetOtherButtonColors(loadFilterFragments.button1);
+        });
+        dialog.show();
+    }
+
+    private void messageDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.lyt_forget_password, null);
+        builder.setView(dialogView);
+        AlertDialog dialog = builder.create();
+        EditText passwordEditText = dialogView.findViewById(R.id.Password);
+        TextView textGetPassword = dialogView.findViewById(R.id.textGetPassword);
+        LinearLayout passwordLayout = dialogView.findViewById(R.id.password_layout);
+        LinearLayout mobileLayout = dialogView.findViewById(R.id.mobileLayout);
+        LinearLayout pashuNumber = dialogView.findViewById(R.id.pashuNumber);
+        passwordLayout.setVisibility(View.VISIBLE);
+        mobileLayout.setVisibility(View.GONE);
+        pashuNumber.setVisibility(View.GONE);
+
+        textGetPassword.setText(R.string.delete_animal_profile);
+
+        dialogView.findViewById(R.id.textGetPassword).setOnClickListener(v -> {
+            String pass = passwordEditText.getText().toString();
+
+            if (pass.isEmpty()) {
+                passwordEditText.setError(getString(R.string.enter_password_number));
+            } else if (pass.length() < 4) {
+                passwordEditText.setError(getString(R.string.enter_correct_password));
+            } else if (!pass.equals(Password)) {
+                Toast.makeText(requireContext(), R.string.error_password_not_matching, Toast.LENGTH_SHORT).show();
+            } else {
+                dialog.dismiss();
+                updateUserBusinessStatus(kisanId, "0");
+            }
+        });
+        dialogView.findViewById(R.id.textCancel).setOnClickListener(v -> dialog.dismiss());
+        dialog.show();
+    }
+
+    private void getBusinesPersonStatus(String userId) {
+        if (userId == null || userId.isEmpty()) {
+            return;
+        }
+        StringRequest getRequest = new StringRequest(Request.Method.POST, constant.GET_USER_ROLES,
+                response -> {
+                    Log.d("Checkresponse", "" + response);
+                    try {
+                        JSONObject jsonObject = new JSONObject(response);
+                        statusStr = jsonObject.optString("status", "");
+                        if ("success".equalsIgnoreCase(statusStr)) {
+                            JSONObject dataObject = jsonObject.optJSONObject("data");
+                            if (dataObject != null) {
+                                isBusinessman = dataObject.optString("is_businessman");
+                                if (isBusinessman.equals("0")) {
+                                    Log.d("BusinessStatus", "Status already set. Skipping...");
+                                    loadFilterFragments.button3.setVisibility(View.VISIBLE);
+                                    loadFilterFragments.iconbutton3.getLayoutParams().height = 60;
+                                    loadFilterFragments.iconbutton3.getLayoutParams().width = 60;
+                                    loadFilterFragments.iconbutton3.setImageResource(R.drawable.pashu_vyapari);
+                                    loadFilterFragments.btn3txt.setText(R.string.str_join_as_seller);
+                                    loadFilterFragments.button4.setVisibility(GONE);
+                                } else if (isBusinessman.equals("1")) {
+                                    loadFilterFragments.button4.setVisibility(View.VISIBLE);
+                                    loadFilterFragments.iconbutton4.setImageResource(R.drawable.cancel_iocn);
+                                    loadFilterFragments.btn4txt.setText(R.string.cancel_role);
+                                    loadFilterFragments.button3.setVisibility(View.GONE);
+                                }
+                                Log.d("BusinessStatus", "User is helper: " + isBusinessman);
+                            } else {
+                                Log.e("BusinessStatus", "Data object missing");
+                            }
+                        } else {
+                            messageStr = jsonObject.optString("message", "Failed to get business status");
+                            Log.e("BusinessStatus", messageStr);
+                        }
+                    } catch (JSONException e) {
+                        Log.e("BusinessStatus", "JSON parsing error: " + e.getMessage());
+                        Toast.makeText(getContext(), R.string.json_parsing_error, Toast.LENGTH_SHORT).show();
+                    }
+                },
+                error -> {
+                    Log.e("BusinessStatus", "Error fetching business status: " + error.getMessage());
+                    Toast.makeText(getContext(), R.string.network_error, Toast.LENGTH_SHORT).show();
+                }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("id", userId);
+                return params;
+            }
+        };
+        getRequest.setRetryPolicy(ApiUtils.DEFAULT_RETRY_POLICY);
+        Volley.newRequestQueue(requireContext()).add(getRequest);
+    }
+
+    private void updateUserBusinessStatus(String userId, String statusValue) {
+        ProgressDialog dialog = new ProgressDialog(getActivity());
+        dialog.setMessage(getString(R.string.saving_data));
+        dialog.setCancelable(false);
+        dialog.show();
+        if (userId == null || userId.isEmpty()) {
+            return;
+        }
+        String url = constant.UPDATE_USER_ROLE;
+        RequestQueue requestQueue = Volley.newRequestQueue(requireContext());
+        StringRequest postRequest = new StringRequest(Request.Method.POST, url,
+                response -> {
+                    Log.d("UpdateStatus", response);
+                    dialog.dismiss();
+                    try {
+                        JSONObject jsonObject = new JSONObject(response);
+                        String status = jsonObject.optString("status", "");
+                        if ("success".equalsIgnoreCase(status)) {
+                            getBusinesPersonStatus(kisanId);
+                            String message = jsonObject.optString("message", "भूमिका सफलतापूर्वक अपडेट कर दी गई");
+                            Log.d("UpdateStatus", message);
+                            Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                        } else {
+                            String message = jsonObject.optString("message", "भूमिका को अपडेट करने में विफल");
+                            Log.e("UpdateStatus", message);
+                            Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                        }
+                    } catch (JSONException e) {
+                        Log.e("UpdateStatus", "JSON parsing error: " + e.getMessage());
+                        Toast.makeText(getContext(), R.string.json_parsing_error, Toast.LENGTH_SHORT).show();
+                    }
+                },
+                error -> {
+                    dialog.dismiss();
+                    Log.e("UpdateStatus", "Error updating business status: " + error);
+                    Toast.makeText(getContext(), R.string.network_error, Toast.LENGTH_SHORT).show();
+                }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("id", userId);
+                params.put("is_businessman", statusValue);
+
+                params.put("id", userId);
+                Log.d("applyLog", "id: " + userId);
+
+                params.put("is_businessman", statusValue);
+                Log.d("applyLog", "is_businessman: " + statusValue);
+
+                return params;
+            }
+        };
+        postRequest.setRetryPolicy(ApiUtils.DEFAULT_RETRY_POLICY);
+        requestQueue.add(postRequest);
     }
 
     private void changeButtonAndTextColor(LinearLayout selectedButton, TextView text) {
@@ -195,6 +423,16 @@ public class PashuVyapari_fragment extends Fragment {
         if (selecteLayout != loadFilterFragments.button2) {
             loadFilterFragments.button2.setBackgroundColor(getResources().getColor(android.R.color.white));
             ((TextView) loadFilterFragments.btn2txt).setTextColor(getResources().getColor(android.R.color.black));
+        }
+
+        if (selecteLayout != loadFilterFragments.button3) {
+            loadFilterFragments.button3.setBackgroundColor(getResources().getColor(android.R.color.white));
+            ((TextView) loadFilterFragments.btn3txt).setTextColor(getResources().getColor(android.R.color.black));
+        }
+
+        if (selecteLayout != loadFilterFragments.button4) {
+            loadFilterFragments.button4.setBackgroundColor(getResources().getColor(android.R.color.white));
+            ((TextView) loadFilterFragments.btn4txt).setTextColor(getResources().getColor(android.R.color.black));
         }
     }
 
@@ -273,46 +511,34 @@ public class PashuVyapari_fragment extends Fragment {
 
     private void filterHighestSales() {
         if (data.isEmpty()) return;
-        List<Map<String, String>> filtered = new ArrayList<>();
-        int maxSales = 0;
-        for (Map<String, String> item : data) {
+        List<Map<String, String>> sortedList = new ArrayList<>(data);
+        Collections.sort(sortedList, (o1, o2) -> {
             try {
-                int sales = Integer.parseInt(item.get("total_sales"));
-                if (sales > maxSales) maxSales = sales;
-            } catch (NumberFormatException e) {}
-        }
-        for (Map<String, String> item : data) {
-            try {
-                int sales = Integer.parseInt(item.get("total_sales"));
-                if (sales == maxSales) filtered.add(item);
-            } catch (NumberFormatException e) {}
-        }
-        adapter.updateList(filtered);
-        totalVyapari.setText(getString(R.string.total_vyapari, String.valueOf(filtered.size())));
+                int sales1 = Integer.parseInt(o1.get("total_sales"));
+                int sales2 = Integer.parseInt(o2.get("total_sales"));
+                return Integer.compare(sales2, sales1);
+            } catch (NumberFormatException e) {
+                return 0;
+            }
+        });
+        adapter.updateList(sortedList);
+        totalVyapari.setText(getString(R.string.total_vyapari, String.valueOf(sortedList.size())));
     }
 
     private void filterLowestSales() {
         if (data.isEmpty()) return;
-        List<Map<String, String>> filtered = new ArrayList<>();
-        int minSales = Integer.MAX_VALUE;
-        for (Map<String, String> item : data) {
+        List<Map<String, String>> sortedList = new ArrayList<>(data);
+        Collections.sort(sortedList, (o1, o2) -> {
             try {
-                int sales = Integer.parseInt(item.get("total_sales"));
-                if (sales > 0 && sales < minSales) minSales = sales;
-            } catch (NumberFormatException e) {}
-        }
-        if (minSales == Integer.MAX_VALUE) {
-            adapter.updateList(new ArrayList<>());
-            return;
-        }
-        for (Map<String, String> item : data) {
-            try {
-                int sales = Integer.parseInt(item.get("total_sales"));
-                if (sales == minSales) filtered.add(item);
-            } catch (NumberFormatException e) {}
-        }
-        adapter.updateList(filtered);
-        totalVyapari.setText(getString(R.string.total_vyapari, String.valueOf(filtered.size())));
+                int sales1 = Integer.parseInt(o1.get("total_sales"));
+                int sales2 = Integer.parseInt(o2.get("total_sales"));
+                return Integer.compare(sales1, sales2);
+            } catch (NumberFormatException e) {
+                return 0;
+            }
+        });
+        adapter.updateList(sortedList);
+        totalVyapari.setText(getString(R.string.total_vyapari, String.valueOf(sortedList.size())));
     }
 
     public void getSellingList(String fromDate, String toDate) {
@@ -371,7 +597,6 @@ public class PashuVyapari_fragment extends Fragment {
                                 info.put("userId", obj.optString("userid", ""));
                                 info.put("name", obj.optString("name", ""));
                                 info.put("father_name", obj.optString("father_name", ""));
-//                                info.put("surname", obj.optString("surname", ""));
                                 info.put("kisanNumber", obj.optString("kisan_number", ""));
                                 info.put("caste", obj.optString("caste", ""));
                                 info.put("state", obj.optString("state", ""));
@@ -485,91 +710,4 @@ public class PashuVyapari_fragment extends Fragment {
         adapter.setOnItemSelectedListener(selectedDateRange -> {
         });
     }
-
-    // Method to get user's businessman status
-//    private void getUserBusinessmanStatus() {
-//        ProgressDialog dialog = new ProgressDialog(getActivity());
-//        dialog.setMessage(getString(R.string.getting_data));
-//        dialog.setCancelable(false);
-//        dialog.show();
-//
-//        String url = constant.BASE_URL + "get_user_businessman_status?userid=" + kisanId;
-//
-//        RequestQueue requestQueue = Volley.newRequestQueue(requireContext());
-//        StringRequest getRequest = new StringRequest(Request.Method.GET, url,
-//                response -> {
-//                    dialog.dismiss();
-//                    try {
-//                        JSONObject jsonObject = new JSONObject(response);
-//                        String status = jsonObject.optString("status", "");
-//                        String message = jsonObject.optString("message", "");
-//
-//                        if ("success".equalsIgnoreCase(status)) {
-//                            boolean isBusinessman = jsonObject.optBoolean("is_businessman", false);
-//                            // Handle the status as needed (e.g., update UI)
-//                            Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
-//                        } else {
-//                            Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
-//                        }
-//                    } catch (JSONException e) {
-//                        dialog.dismiss();
-//                        Toast.makeText(getContext(), R.string.json_parsing_error, Toast.LENGTH_SHORT).show();
-//                    }
-//                },
-//                error -> {
-//                    dialog.dismiss();
-//                    handleVolleyError(error);
-//                });
-//
-//        getRequest.setRetryPolicy(ApiUtils.DEFAULT_RETRY_POLICY);
-//        requestQueue.add(getRequest);
-//    }
-//
-//    // Method to update user's businessman status
-//    private void updateUserBusinessmanStatus(boolean isBusinessman) {
-//        ProgressDialog dialog = new ProgressDialog(getActivity());
-//        dialog.setMessage(getString(R.string.updating_data));
-//        dialog.setCancelable(false);
-//        dialog.show();
-//
-//        String url = constant.BASE_URL + "update_user_businessman_status";
-//
-//        RequestQueue requestQueue = Volley.newRequestQueue(requireContext());
-//        StringRequest postRequest = new StringRequest(Request.Method.POST, url,
-//                response -> {
-//                    dialog.dismiss();
-//                    try {
-//                        JSONObject jsonObject = new JSONObject(response);
-//                        String status = jsonObject.optString("status", "");
-//                        String message = jsonObject.optString("message", "");
-//
-//                        if ("success".equalsIgnoreCase(status)) {
-//                            Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
-//                            // Refresh the status after update
-//                            getUserBusinessmanStatus();
-//                        } else {
-//                            Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
-//                        }
-//                    } catch (JSONException e) {
-//                        dialog.dismiss();
-//                        Toast.makeText(getContext(), R.string.json_parsing_error, Toast.LENGTH_SHORT).show();
-//                    }
-//                },
-//                error -> {
-//                    dialog.dismiss();
-//                    handleVolleyError(error);
-//                }) {
-//            @Override
-//            protected Map<String, String> getParams() {
-//                Map<String, String> params = new HashMap<>();
-//                params.put("userid", kisanId);
-//                params.put("is_businessman", String.valueOf(isBusinessman ? 1 : 0));
-//                return params;
-//            }
-//        };
-//
-//        postRequest.setRetryPolicy(ApiUtils.DEFAULT_RETRY_POLICY);
-//        requestQueue.add(postRequest);
-//    }
-
 }

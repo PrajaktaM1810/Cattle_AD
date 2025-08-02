@@ -154,18 +154,24 @@ public class RegisterActivity extends AppCompatActivity {
         commonMethods.getState(this, url, new CommonMethods.OnStateResponseListener() {
             @Override
             public void onSuccess(ArrayList<HashMap<String, String>> stateList) {
+                Log.d("API_STATE_RESPONSE", "Raw stateList: " + stateList.toString());
+
                 ArrayList<String> stateNames = new ArrayList<>();
                 HashSet<String> uniqueStates = new HashSet<>();
 
                 stateNames.add(getString(R.string.hint_state));
 
                 for (HashMap<String, String> state : stateList) {
+                    Log.d("STATE_ITEM", "State Entry: " + state.toString());
+
                     String stateName = state.get("state");
                     if (!uniqueStates.contains(stateName)) {
                         uniqueStates.add(stateName);
                         stateNames.add(stateName);
                     }
                 }
+
+                Log.d("STATE_NAMES", "Final stateNames list: " + stateNames.toString());
 
                 ArrayAdapter<String> adapter = new ArrayAdapter<>(RegisterActivity.this,
                         android.R.layout.simple_spinner_item, stateNames);
@@ -177,6 +183,7 @@ public class RegisterActivity extends AppCompatActivity {
                     public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                         if (position > 0) {
                             stateId = stateList.get(position - 1).get("id");
+                            Log.d("STATE_SELECTED", "Selected State ID: " + stateId);
                         } else {
                             stateId = null;
                         }
@@ -191,10 +198,12 @@ public class RegisterActivity extends AppCompatActivity {
 
             @Override
             public void onError(String errorMessage) {
+                Log.e("API_STATE_ERROR", "Error fetching states: " + errorMessage);
                 Toast.makeText(RegisterActivity.this, errorMessage, Toast.LENGTH_SHORT).show();
             }
         });
     }
+
     private void registerUser() {
         dialog = new ProgressDialog(RegisterActivity.this);
         dialog.setMessage(getString(R.string.Saving));
@@ -253,21 +262,23 @@ public class RegisterActivity extends AppCompatActivity {
                     }
                     Log.d("Check", "Error: " + error.getMessage());
                 }) {
+
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
                 params.put("name", name.getText().toString().trim());
                 params.put("password", password.getText().toString().trim());
                 params.put("caste", caste.getText().toString().trim());
-                params.put("state", stateId);
+                params.put("state", stateSpinner.getSelectedItem().toString().trim());
                 params.put("mobile", MobileNumber.getText().toString().trim());
                 Log.d("RegisterParams", "name: " + name.getText().toString().trim());
                 Log.d("RegisterParams", "password: " + password.getText().toString().trim());
                 Log.d("RegisterParams", "caste: " + caste.getText().toString().trim());
-                Log.d("RegisterParams", "state: " + stateId);
-                Log.d("RegisterParams", "mobile: " + mobile);
+                Log.d("RegisterParams", "state: " + stateSpinner.getSelectedItem().toString().trim());
+                Log.d("RegisterParams", "mobile: " + MobileNumber.getText().toString().trim());
                 return params;
             }
+
         };
         postRequest.setRetryPolicy(ApiUtils.DEFAULT_RETRY_POLICY);
         requestQueue.add(postRequest);

@@ -7,13 +7,16 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkResponse;
 import com.android.volley.NoConnectionError;
 import com.android.volley.NetworkError;
 import com.android.volley.ParseError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.Response;
 import com.android.volley.ServerError;
 import com.android.volley.TimeoutError;
+import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.tarbar.kisan.R;
@@ -22,6 +25,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -60,10 +64,10 @@ public class CommonMethods {
                         }
                     } catch (JSONException e) {
                         if (e instanceof JSONException) {
-                            Log.d("CheckError",""+e);
+                            Log.d("CheckError", "" + e);
                             Toast.makeText(context, R.string.json_parsing_error, Toast.LENGTH_SHORT).show();
                         } else {
-                            Log.d("CheckException",""+e);
+                            Log.d("CheckException", "" + e);
                             Toast.makeText(context, R.string.generic_error, Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -87,7 +91,17 @@ public class CommonMethods {
                     }
                     listener.onError(errorMessage);
                     Log.e("VolleyError", error.toString());
-                });
+                }) {
+            @Override
+            protected Response<String> parseNetworkResponse(NetworkResponse response) {
+                try {
+                    String utf8Json = new String(response.data, StandardCharsets.UTF_8);
+                    return Response.success(utf8Json, HttpHeaderParser.parseCacheHeaders(response));
+                } catch (Exception e) {
+                    return Response.error(new ParseError(e));
+                }
+            }
+        };
         requestQueue.add(stringRequest);
     }
 

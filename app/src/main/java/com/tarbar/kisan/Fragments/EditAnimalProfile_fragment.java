@@ -2,7 +2,6 @@ package com.tarbar.kisan.Fragments;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
-import static com.tarbar.kisan.Helper.constant.ADD_ANIMAL;
 import static com.tarbar.kisan.Helper.constant.DELETE_ANIMAL;
 import static com.tarbar.kisan.Helper.constant.GET_ANIMAL_DATA;
 import static com.tarbar.kisan.Helper.constant.UPDATE_ANIMAL;

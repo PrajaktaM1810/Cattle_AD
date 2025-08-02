@@ -5,7 +5,6 @@ import static com.tarbar.kisan.Helper.constant.ADD_SELLING_DETAILS;
 import static com.tarbar.kisan.Helper.constant.DELETE_PARTICULAR_SELLING_DETAILS;
 import static com.tarbar.kisan.Helper.constant.GET_PARTICULAR_SELLING_DETAILS;
 import static com.tarbar.kisan.Helper.constant.UPDATE_PARTICULAR_SELLING_DETAILS;
-
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
@@ -26,43 +25,37 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkError;
 import com.android.volley.NoConnectionError;
 import com.android.volley.ParseError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
 import com.android.volley.ServerError;
 import com.android.volley.TimeoutError;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.tarbar.kisan.Activities.Checking;
 import com.tarbar.kisan.Activities.LoadFilterFragments;
 import com.tarbar.kisan.Activities.LoadFormFragments;
-import com.tarbar.kisan.Activities.LoginActivity;
 import com.tarbar.kisan.Activities.MainActivity;
 import com.tarbar.kisan.Helper.ApiUtils;
 import com.tarbar.kisan.Helper.Iconstant;
 import com.tarbar.kisan.Helper.SharedPreferenceManager;
 import com.tarbar.kisan.R;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Locale;
 
 public class PashuUpdateForm_fragment extends Fragment {
     SharedPreferenceManager sharedPrefMgr;
@@ -114,7 +107,6 @@ public class PashuUpdateForm_fragment extends Fragment {
                 public void onClick(View v) {
                     Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.click_animation);
                     v.startAnimation(animation);
-
                     AnimalType.setText("");
                     SellerMobileNumber.setText("");
                     SellingDate.setText("");
@@ -124,10 +116,9 @@ public class PashuUpdateForm_fragment extends Fragment {
                     KisanTahsil.setText("");
                     KisanVillage.setText("");
                     KisanPassword.setText("");
-
-                    Intent i = new Intent(requireContext(), LoadFilterFragments.class);
-                    i.putExtra("PashuUpdate_fragment", true);
-                    startActivity(i);
+                    Intent intent = new Intent(requireContext(), LoadFilterFragments.class);
+                    intent.putExtra("PashuUpdate_fragment", true);
+                    startActivity(intent);
                     requireActivity().finish();
                 }
             });
@@ -144,17 +135,14 @@ public class PashuUpdateForm_fragment extends Fragment {
             cowImg.setOnClickListener(null);
             buffaloImg.setOnClickListener(null);
             Delete.setVisibility(GONE);
-
             txtState.setVisibility(GONE);
             txtJilha.setVisibility(GONE);
             txtTahsil.setVisibility(GONE);
             txtVillage.setVisibility(GONE);
-
             llstate.setVisibility(GONE);
             lljilha.setVisibility(GONE);
             llvillage.setVisibility(GONE);
             lltahsil.setVisibility(GONE);
-
             AnimalType.setText(Animal_Type);
             KisanMobileNumber.setText(MobileNumber);
         }
@@ -205,16 +193,18 @@ public class PashuUpdateForm_fragment extends Fragment {
         submit.setOnClickListener(v -> {
             Animation animation = AnimationUtils.loadAnimation(requireContext(), R.anim.click_animation);
             v.startAnimation(animation);
-
             String regex = "^[6789]\\d{9}$";
             String strSellerMobile = SellerMobileNumber.getText().toString();
             String strSellingDate = SellingDate.getText().toString();
             String strKisanPassword = KisanPassword.getText().toString();
+            String strKisanMobile = KisanMobileNumber.getText().toString();
 
             if (strSellerMobile.isEmpty()) {
                 SellerMobileNumber.setError(getString(R.string.error_enter_seller_mobile));
             } else if (!strSellerMobile.matches(regex)) {
                 SellerMobileNumber.setError(getString(R.string.error_invalid_seller_mobile));
+            } else if (strSellerMobile.equals(strKisanMobile)) {
+                SellerMobileNumber.setError(getString(R.string.error_valid_seller_number));
             } else if (strSellingDate.isEmpty()) {
                 SellingDate.setError(getString(R.string.error_byat_birhtdate));
                 SellingDate.setFocusable(true);
@@ -258,13 +248,11 @@ public class PashuUpdateForm_fragment extends Fragment {
         View dialogView = inflater.inflate(R.layout.lyt_forget_password, null);
         builder.setView(dialogView);
         AlertDialog dialog = builder.create();
-
         EditText passwordEditText = dialogView.findViewById(R.id.Password);
         TextView textGetPassword = dialogView.findViewById(R.id.textGetPassword);
         LinearLayout passwordLayout = dialogView.findViewById(R.id.password_layout);
         LinearLayout mobileLayout = dialogView.findViewById(R.id.mobileLayout);
         LinearLayout pashuNumber = dialogView.findViewById(R.id.pashuNumber);
-
         passwordLayout.setVisibility(View.VISIBLE);
         mobileLayout.setVisibility(View.GONE);
         pashuNumber.setVisibility(View.GONE);
@@ -285,13 +273,12 @@ public class PashuUpdateForm_fragment extends Fragment {
                 callApi();
             }
         });
-
         dialogView.findViewById(R.id.textCancel).setOnClickListener(v -> dialog.dismiss());
         dialog.show();
     }
 
     private void callApi() {
-        deleteByat(sellinId);
+        deleteData(sellinId);
     }
 
     private void showDatePickerDialog() {
@@ -333,7 +320,6 @@ public class PashuUpdateForm_fragment extends Fragment {
                             KisanTahsil.setText("");
                             KisanVillage.setText("");
                             KisanPassword.setText("");
-
                             Intent intent = new Intent(requireContext(), Checking.class);
                             intent.putExtra("isVerified", true);
                             intent.putExtra("message", Message);
@@ -384,15 +370,24 @@ public class PashuUpdateForm_fragment extends Fragment {
                 Map<String, String> params = new HashMap<>();
                 String pashuType = AnimalType.getText().toString();
                 String sellerNumber = SellerMobileNumber.getText().toString();
-                String sellingDate = SellingDate.getText().toString();
+                String sellingDateInput = SellingDate.getText().toString();
+                String formattedSellingDate = sellingDateInput;
+                try {
+                    SimpleDateFormat inputFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+                    SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+                    Date date = inputFormat.parse(sellingDateInput);
+                    formattedSellingDate = outputFormat.format(date);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
                 params.put("userid", userid);
                 params.put("pashu_type", pashuType);
                 params.put("seller_number", sellerNumber);
-                params.put("selling_date", sellingDate);
+                params.put("selling_date", formattedSellingDate);
                 Log.d("UpdateParams", "userid: " + userid);
                 Log.d("UpdateParams", "pashu_type: " + pashuType);
                 Log.d("UpdateParams", "seller_number: " + sellerNumber);
-                Log.d("UpdateParams", "selling_date: " + sellingDate);
+                Log.d("UpdateParams", "selling_date: " + formattedSellingDate);
                 return params;
             }
         };
@@ -405,20 +400,16 @@ public class PashuUpdateForm_fragment extends Fragment {
         dialog.setMessage(getString(R.string.getting_data));
         dialog.setCancelable(false);
         dialog.show();
-
         String url = GET_PARTICULAR_SELLING_DETAILS;
         RequestQueue requestQueue = Volley.newRequestQueue(requireContext());
-
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 response -> {
                     dialog.dismiss();
                     try {
                         JSONObject jsonObject = new JSONObject(response);
                         String status = jsonObject.getString("status");
-
                         if ("success".equals(status)) {
                             JSONObject data = jsonObject.getJSONObject("data");
-
                             String pashuType = data.getString("pashu_type");
                             String sellerNumber = data.getString("seller_number");
                             String sellingDate = data.getString("selling_date");
@@ -427,7 +418,6 @@ public class PashuUpdateForm_fragment extends Fragment {
                             String tahsil = data.getString("tahsil");
                             String village = data.getString("village");
                             String state = data.getString("state");
-
                             AnimalType.setText(isValid(pashuType) ? pashuType : "");
                             SellerMobileNumber.setText(isValid(sellerNumber) ? sellerNumber : "");
                             SellingDate.setText(isValid(sellingDate) ? sellingDate : "");
@@ -436,7 +426,6 @@ public class PashuUpdateForm_fragment extends Fragment {
                             KisanJilha.setText(isValid(jilha) ? jilha : "");
                             KisanTahsil.setText(isValid(tahsil) ? tahsil : "");
                             KisanVillage.setText(isValid(village) ? village : "");
-
                         } else {
                             String message = jsonObject.getString("message");
                             Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
@@ -565,7 +554,7 @@ public class PashuUpdateForm_fragment extends Fragment {
         requestQueue.add(postRequest);
     }
 
-    private void deleteByat(String SellinId) {
+    private void deleteData(String SellinId) {
         dialog = new ProgressDialog(requireContext());
         dialog.setMessage(getString(R.string.deleting));
         dialog.setCancelable(false);
@@ -637,27 +626,4 @@ public class PashuUpdateForm_fragment extends Fragment {
         requestQueue.add(stringRequest);
     }
 
-    @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
-        requireActivity().getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
-            @Override
-            public void handleOnBackPressed() {
-                AnimalType.setText("");
-                SellerMobileNumber.setText("");
-                SellingDate.setText("");
-                KisanMobileNumber.setText("");
-                KisanState.setText("");
-                KisanJilha.setText("");
-                KisanTahsil.setText("");
-                KisanVillage.setText("");
-                KisanPassword.setText("");
-
-                Intent i = new Intent(requireContext(), LoadFilterFragments.class);
-                i.putExtra("PashuUpdate_fragment", true);
-                startActivity(i);
-                requireActivity().finish();
-            }
-        });
-    }
 }

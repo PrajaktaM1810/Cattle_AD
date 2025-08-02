@@ -11,7 +11,11 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.tarbar.kisan.R;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 public class PashuVyapariList_Adapter extends RecyclerView.Adapter<PashuVyapariList_Adapter.ViewHolder> {
@@ -36,7 +40,20 @@ public class PashuVyapariList_Adapter extends RecyclerView.Adapter<PashuVyapariL
         Map<String, String> animalInfo = data.get(position);
 
         holder.tvKisanMobileNumber.setText(getValidValue(animalInfo.get("sellerNumber")));
-        holder.tvDate.setText(getValidValue(animalInfo.get("sellingDate")));
+        String sellingDate = animalInfo.get("sellingDate");
+        if (sellingDate == null || sellingDate.trim().isEmpty() || sellingDate.equals("0000-00-00")) {
+            holder.tvDate.setText("-");
+        } else {
+            try {
+                SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+                SimpleDateFormat outputFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+                Date date = inputFormat.parse(sellingDate);
+                String formattedDate = outputFormat.format(date);
+                holder.tvDate.setText(formattedDate);
+            } catch (ParseException e) {
+                holder.tvDate.setText(sellingDate);
+            }
+        }
 
         String animalType = getValidValue(animalInfo.get("pashuType"));
             if (animalType.equals(holder.itemView.getContext().getString(R.string.str_cow))) {

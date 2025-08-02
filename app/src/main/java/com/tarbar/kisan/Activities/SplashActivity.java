@@ -144,10 +144,12 @@ public class SplashActivity extends AppCompatActivity {
                     }
                 },
                 error -> {
+                    Log.d("CheckERROR",""+error);
                     if (error instanceof TimeoutError) {
                         Toast.makeText(SplashActivity.this, R.string.timeout_error, Toast.LENGTH_SHORT).show();
                     } else if (error instanceof NoConnectionError) {
                         Toast.makeText(SplashActivity.this, R.string.no_connection_error, Toast.LENGTH_SHORT).show();
+                        Log.d("CheckERROR",""+error);
                     } else if (error instanceof AuthFailureError) {
                         Toast.makeText(SplashActivity.this, R.string.auth_failure_error, Toast.LENGTH_SHORT).show();
                     } else if (error instanceof ServerError) {

@@ -1,9 +1,7 @@
 package com.tarbar.kisan.Adapter;
 
 import static com.tarbar.kisan.Helper.constant.PROFILE_IMGAE_PATH;
-
 import android.content.Context;
-
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.util.Log;
@@ -12,13 +10,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.squareup.picasso.Picasso;
 import com.tarbar.kisan.R;
-
 import java.io.ByteArrayOutputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -26,7 +21,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class Kisan_Madat_List_Adapter extends RecyclerView.Adapter<Kisan_Madat_List_Adapter.ViewHolder> {
@@ -49,7 +43,6 @@ public class Kisan_Madat_List_Adapter extends RecyclerView.Adapter<Kisan_Madat_L
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Map<String, String> animalInfo = data.get(position);
-
         String profilePic = animalInfo.get("profilePic");
         String imageUrl = PROFILE_IMGAE_PATH + profilePic;
         Picasso.get()
@@ -73,17 +66,10 @@ public class Kisan_Madat_List_Adapter extends RecyclerView.Adapter<Kisan_Madat_L
                 });
 
         String name = animalInfo.get("name");
-        String fathername = animalInfo.get("father_name");
-//        String surname = animalInfo.get("surname");
-
         String fullName = (isValid(name) ? name : "");
-//                  (isValid(fathername) ? fathername : "") + " " +
-//                (isValid(surname) ? surname : "");
-
         fullName = fullName.trim();
 
         holder.txtName.setText(fullName);
-
 
         if (isValid(animalInfo.get("father_name"))) {
             holder.txtFatherName.setText(context.getString(R.string.title_father_name) + " : " + animalInfo.get("father_name"));
@@ -139,7 +125,6 @@ public class Kisan_Madat_List_Adapter extends RecyclerView.Adapter<Kisan_Madat_L
                 holder.txtDate.setText(context.getString(R.string.str_date) + " : " + dateString);
             }
         }
-
     }
 
     private boolean isValid(String value) {
@@ -176,7 +161,6 @@ public class Kisan_Madat_List_Adapter extends RecyclerView.Adapter<Kisan_Madat_L
             txtMobileNumber = itemView.findViewById(R.id.txtMobileNumber);
             txtAmount = itemView.findViewById(R.id.txtAmount);
             txtDate = itemView.findViewById(R.id.txtDate);
-
             profilepicture = itemView.findViewById(R.id.profilepicture);
             kisanImg = itemView.findViewById(R.id.kisanImg);
         }

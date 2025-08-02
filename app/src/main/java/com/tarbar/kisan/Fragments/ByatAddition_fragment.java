@@ -732,6 +732,7 @@ public class ByatAddition_fragment extends Fragment {
                                 Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {
+                            Log.d("JSONExceptionCheck", "" + e);
                             e.printStackTrace();
                             Toast.makeText(getActivity(), R.string.generic_error, Toast.LENGTH_SHORT).show();
                         }
@@ -742,7 +743,7 @@ public class ByatAddition_fragment extends Fragment {
                     public void onErrorResponse(VolleyError error) {
                         dialog.dismiss();
                         Toast.makeText(getActivity(), R.string.generic_error, Toast.LENGTH_SHORT).show();
-                        Log.d("Check", "" + error.getMessage());
+                        Log.d("JSONExceptionCheck", "" + error.getMessage());
                     }
                 }) {
             @Override

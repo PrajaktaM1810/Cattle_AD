@@ -484,7 +484,7 @@ public class EditKisanProfile_fragment extends Fragment {
         dialog.show();
 
         RequestQueue requestQueue = Volley.newRequestQueue(requireContext());
-        final StringRequest postRequest = new StringRequest(Request.Method.POST, DELETE_PROFILE_PICTURE,
+        final StringRequest stringRequest = new StringRequest(Request.Method.POST, DELETE_PROFILE_PICTURE,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -541,6 +541,8 @@ public class EditKisanProfile_fragment extends Fragment {
                 return params;
             }
         };
+        stringRequest.setRetryPolicy(ApiUtils.DEFAULT_RETRY_POLICY);
+        requestQueue.add(stringRequest);
     }
 
     private void fetchStates() {
@@ -743,6 +745,107 @@ public class EditKisanProfile_fragment extends Fragment {
         requestQueue.add(stringRequest);
     }
 
+//    private void UpdateUserProfile(final byte[] imageData) {
+//        dialog = new ProgressDialog(getContext());
+//        dialog.setMessage(getString(R.string.saving_data));
+//        dialog.setCancelable(false);
+//        dialog.show();
+//
+//        VolleyMultipartRequest volleyMultipartRequest = new VolleyMultipartRequest(Request.Method.POST, UPDATE_PROFILE,
+//                new Response.Listener<NetworkResponse>() {
+//                    @Override
+//                    public void onResponse(NetworkResponse response) {
+//                        dialog.dismiss();
+//                        try {
+//                            JSONObject jsonObject = new JSONObject(new String(response.data, "UTF-8"));
+//                            String status = jsonObject.getString("status");
+//                            String message = jsonObject.getString("message");
+//
+//                            Intent intent = new Intent(requireContext(), Checking.class);
+//                            intent.putExtra("isVerified", true);
+//                            intent.putExtra("message", message);
+//                            intent.putExtra("nextActivity", MainActivity.class);
+//                            intent.putExtra("SELECT_PROFILE_FRAGMENT", true);
+//                            startActivity(intent);
+//
+//                        } catch (Exception e) {
+//                            dialog.dismiss();
+//                            Log.e("JSONException", e.getMessage(), e);
+//                            Toast.makeText(getContext(), R.string.json_parsing_error, Toast.LENGTH_SHORT).show();
+//                        }
+//                    }
+//                },
+//                new Response.ErrorListener() {
+//                    @Override
+//                    public void onErrorResponse(VolleyError error) {
+//                        dialog.dismiss();
+//                        if (error instanceof TimeoutError) {
+//                            Toast.makeText(getContext(), R.string.timeout_error, Toast.LENGTH_SHORT).show();
+//                        } else if (error instanceof NoConnectionError) {
+//                            Toast.makeText(getContext(), R.string.no_connection_error, Toast.LENGTH_SHORT).show();
+//                        } else if (error instanceof AuthFailureError) {
+//                            Toast.makeText(getContext(), R.string.auth_failure_error, Toast.LENGTH_SHORT).show();
+//                        } else if (error instanceof ServerError) {
+//                            Log.d("ServerError",""+error);
+//                            Toast.makeText(getContext(), R.string.server_error, Toast.LENGTH_SHORT).show();
+//                        } else if (error instanceof NetworkError) {
+//                            Toast.makeText(getContext(), R.string.network_error, Toast.LENGTH_SHORT).show();
+//                        } else if (error instanceof ParseError) {
+//                            Toast.makeText(getContext(), R.string.parse_error, Toast.LENGTH_SHORT).show();
+//                        } else {
+//                            Toast.makeText(getContext(), R.string.unknown_error, Toast.LENGTH_SHORT).show();
+//                        }
+//                        Log.d("Checkkjhljh", "" + error.getMessage());
+//                    }
+//                }) {
+//
+//            @Override
+//            public String getBodyContentType() {
+//                return "multipart/form-data; charset=UTF-8";
+//            }
+//
+//            @Override
+//            protected String getParamsEncoding() {
+//                return "UTF-8";
+//            }
+//
+//            @Override
+//            protected Map<String, String> getParams() throws AuthFailureError {
+//                Map<String, String> params = new HashMap<>();
+//                params.put("userid", userid);
+//                params.put("name", name.getText().toString().trim());
+//                params.put("father_name", fathername.getText().toString().trim());
+//                params.put("state", "KJLL");
+//                params.put("jilha", "reg");
+//                params.put("tahsil", "rdggh");
+//                params.put("village", "rghyeye");
+//                params.put("caste", caste.getText().toString().trim());
+//                params.put("mobile", MobileNumber.getText().toString().trim());
+//
+//                Log.d("ProfileUpdate", "Params: " + params.toString());
+//                return params;
+//            }
+//
+//            @Override
+//            protected Map<String, DataPart> getByteData() {
+//                Map<String, DataPart> params = new HashMap<>();
+//                long imagename = System.currentTimeMillis();
+//
+//                if (imageData != null && imageData.length > 0) {
+//                    params.put("profile_pic", new DataPart(imagename + ".png", imageData));
+//                    Log.d("API_Image_Upload", "Image uploaded. Size: " + imageData.length);
+//                } else {
+//                    Log.e("API_Image_Upload", "No image uploaded.");
+//                }
+//
+//                return params;
+//            }
+//        };
+//        volleyMultipartRequest.setRetryPolicy(ApiUtils.DEFAULT_RETRY_POLICY);
+//        Volley.newRequestQueue(getContext()).add(volleyMultipartRequest);
+//    }
+
+
     private void UpdateUserProfile(final byte[] imageData) {
         dialog = new ProgressDialog(getContext());
         dialog.setMessage(getString(R.string.saving_data));
@@ -753,9 +856,10 @@ public class EditKisanProfile_fragment extends Fragment {
                 new Response.Listener<NetworkResponse>() {
                     @Override
                     public void onResponse(NetworkResponse response) {
+                        Log.e("JSONException", "" + response);
                         dialog.dismiss();
                         try {
-                            JSONObject jsonObject = new JSONObject(new String(response.data));
+                            JSONObject jsonObject = new JSONObject(new String(response.data, "UTF-8"));
                             String status = jsonObject.getString("status");
                             String message = jsonObject.getString("message");
 
@@ -765,7 +869,12 @@ public class EditKisanProfile_fragment extends Fragment {
                             intent.putExtra("nextActivity", MainActivity.class);
                             intent.putExtra("SELECT_PROFILE_FRAGMENT", true);
                             startActivity(intent);
+                            requireActivity().finish();
 
+                        } catch (UnsupportedEncodingException e) {
+                            dialog.dismiss();
+                            Log.e("EncodingException", e.getMessage(), e);
+                            Toast.makeText(getContext(), R.string.encoding_error, Toast.LENGTH_SHORT).show();
                         } catch (JSONException e) {
                             dialog.dismiss();
                             Log.e("JSONException", e.getMessage(), e);
@@ -777,24 +886,24 @@ public class EditKisanProfile_fragment extends Fragment {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         dialog.dismiss();
-                        Log.e("Volley Error", error.toString());
-                        Toast.makeText(getContext(), "Error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                        Log.e("Volley Error", "" + error);
+                        String errorMessage = error.getMessage() == null ? getString(R.string.unknown_error) : error.getMessage();
+                        Toast.makeText(getContext(), "Error: " + errorMessage, Toast.LENGTH_SHORT).show();
                     }
                 }) {
+
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
                 params.put("userid", userid);
                 params.put("name", name.getText().toString().trim());
                 params.put("fathername", fathername.getText().toString().trim());
-//                params.put("surname", surname.getText().toString().trim());
                 params.put("state", state.getText().toString().trim());
                 params.put("jilha", jilha.getText().toString().trim());
                 params.put("tahsil", tahsil.getText().toString().trim());
                 params.put("village", village.getText().toString().trim());
                 params.put("caste", caste.getText().toString().trim());
                 params.put("mobile", MobileNumber.getText().toString().trim());
-
                 return params;
             }
 
@@ -802,20 +911,17 @@ public class EditKisanProfile_fragment extends Fragment {
             protected Map<String, DataPart> getByteData() {
                 Map<String, DataPart> params = new HashMap<>();
                 long imagename = System.currentTimeMillis();
-
                 if (imageData != null && imageData.length > 0) {
                     params.put("profile_pic", new DataPart(imagename + ".png", imageData));
-                    Log.d("API Image Upload", "Image uploaded. Size: " + imageData.length);
-                } else {
-                    Log.e("API Image Upload", "No image uploaded.");
                 }
-
                 return params;
             }
         };
+
         volleyMultipartRequest.setRetryPolicy(ApiUtils.DEFAULT_RETRY_POLICY);
         Volley.newRequestQueue(getContext()).add(volleyMultipartRequest);
     }
+
 
     private void setAutoCompleteTextViewSelection(AutoCompleteTextView autoCompleteTextView, String selectedValue) {
         if (selectedValue != null && !selectedValue.equalsIgnoreCase("Null") && !selectedValue.isEmpty()) {

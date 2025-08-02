@@ -71,6 +71,7 @@ public class Pashu_Garbhavati_List_Adapter extends RecyclerView.Adapter<Pashu_Ga
     private List<Map<String, String>> dataList = new ArrayList<>();
     private SharedPreferenceManager sharedPrefMgr;
     String mobileNumber, KisanId, KisanNumber,animalnumber,animaltype,byatcnt,animalBlock,animalOff,milkAdditionDate,pashu_garbhavati_date;
+
     public Pashu_Garbhavati_List_Adapter(Context context, List<Map<String, String>> animalData) {
         this.context = context;
         this.animalData = animalData;
