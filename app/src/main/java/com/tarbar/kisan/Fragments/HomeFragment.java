@@ -142,10 +142,10 @@ public class HomeFragment extends Fragment {
         pashuBijdan.setOnClickListener(v -> {
             Animation animation = AnimationUtils.loadAnimation(requireContext(), R.anim.click_animation);
             v.startAnimation(animation);
-//            Intent i = new Intent(requireContext(), LoadFilterFragments.class);
-//            i.putExtra("PashuGarbhavati_fragment", true);
-//            startActivity(i);
-//            requireActivity().finish();
+            Intent i = new Intent(requireContext(), LoadFilterFragments.class);
+            i.putExtra("PashuGarbhavati_fragment", true);
+            startActivity(i);
+            requireActivity().finish();
         });
 
         pashuUpdate.setOnClickListener(v -> {

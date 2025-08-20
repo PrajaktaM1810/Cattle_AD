@@ -5,8 +5,10 @@ import static android.view.View.VISIBLE;
 import static com.tarbar.kisan.Helper.constant.ADD_BYAT;
 import static com.tarbar.kisan.Helper.constant.Add_BIJDAN_DATA;
 import static com.tarbar.kisan.Helper.constant.DELETE_BYAT;
+import static com.tarbar.kisan.Helper.constant.DELETE_GARBHAVATI_DATA;
 import static com.tarbar.kisan.Helper.constant.GET_BIJDAN_DATA;
 import static com.tarbar.kisan.Helper.constant.GET_BIJDAN_DETAILS;
+import static com.tarbar.kisan.Helper.constant.UPDATE_BIJDAN_DATA;
 import static com.tarbar.kisan.Helper.constant.UPDATE_BYAT_DATA;
 
 import android.app.AlertDialog;
@@ -604,7 +606,7 @@ public class GarbhavatiForm_fragment extends Fragment {
                         String Status = jsonObject1.getString("status");
                         String Message = jsonObject1.getString("message");
 
-                        if (Status.equalsIgnoreCase("success")) {
+                        if (Status.equalsIgnoreCase("true")) {
 
                             AnimalNumber.setText("");
                             AnimalType.setText("");
@@ -616,15 +618,15 @@ public class GarbhavatiForm_fragment extends Fragment {
                             Intent intent = new Intent(requireContext(), Checking.class);
                             intent.putExtra("isVerified", true);
                             intent.putExtra("message", Message);
-                            intent.putExtra("nextActivity", MainActivity.class);
-                            intent.putExtra("SELECT_DETAILS_FRAGMENT", true);
+                            intent.putExtra("nextActivity", LoadFilterFragments.class);
+                            intent.putExtra("PashuGarbhavati_fragment", true);
                             startActivity(intent);
                         } else {
                             Intent intent = new Intent(requireContext(), Checking.class);
                             intent.putExtra("isVerified", false);
                             intent.putExtra("message", Message);
-                            intent.putExtra("nextActivity", MainActivity.class);
-                            intent.putExtra("SELECT_DETAILS_FRAGMENT", true);
+                            intent.putExtra("nextActivity", LoadFilterFragments.class);
+                            intent.putExtra("PashuGarbhavati_fragment", true);
                             startActivity(intent);
                         }
                     } catch (JSONException e) {
@@ -693,179 +695,183 @@ public class GarbhavatiForm_fragment extends Fragment {
         requestQueue.add(postRequest);
     }
 
-//    private void UpdatePashuAPI(String PashuId) {
-//        dialog = new ProgressDialog(requireContext());
-//        dialog.setMessage(getString(R.string.saving_data));
-//        dialog.setCancelable(false);
-//        dialog.show();
-//        RequestQueue requestQueue = Volley.newRequestQueue(requireContext());
-//        final StringRequest postRequest = new StringRequest(Request.Method.POST, UPDATE_BYAT_DATA,
-//                response -> {
-//                    dialog.dismiss();
-//                    Log.d("UpdateByatAPI", "" + response);
-//                    try {
-//                        JSONObject jsonObject1 = new JSONObject(response);
-//                        String Status = jsonObject1.getString("status");
-//                        String Message = jsonObject1.getString("message");
-//                        if (Status.equalsIgnoreCase("success")) {
-//                            Intent intent = new Intent(requireContext(), Checking.class);
-//                            intent.putExtra("isVerified", true);
-//                            intent.putExtra("message", Message);
-//                            intent.putExtra("nextActivity", MainActivity.class);
-//                            intent.putExtra("SELECT_DETAILS_FRAGMENT", true);
-//                            startActivity(intent);
-//                        } else {
-//                            Intent intent = new Intent(requireContext(), Checking.class);
-//                            intent.putExtra("isVerified", false);
-//                            intent.putExtra("message", Message);
-//                            intent.putExtra("nextActivity", MainActivity.class);
-//                            intent.putExtra("SELECT_DETAILS_FRAGMENT", true);
-//                            startActivity(intent);
-//                        }
-//                    } catch (JSONException e) {
-//                        dialog.dismiss();
-//                        if (e instanceof JSONException) {
-//                            Toast.makeText(requireContext(), R.string.json_parsing_error, Toast.LENGTH_SHORT).show();
-//                        } else {
-//                            Log.d("CheckException",""+e);
-//                            Toast.makeText(requireContext(), R.string.generic_error, Toast.LENGTH_SHORT).show();
-//                        }
-//                    }
-//                },
-//                error -> {
-//                    dialog.dismiss();
-//                    if (error instanceof TimeoutError) {
-//                        Toast.makeText(requireContext(), R.string.timeout_error, Toast.LENGTH_SHORT).show();
-//                    } else if (error instanceof NoConnectionError) {
-//                        Toast.makeText(requireContext(), R.string.no_connection_error, Toast.LENGTH_SHORT).show();
-//                    } else if (error instanceof AuthFailureError) {
-//                        Toast.makeText(requireContext(), R.string.auth_failure_error, Toast.LENGTH_SHORT).show();
-//                    } else if (error instanceof ServerError) {
-//                        Log.d("ServerError",""+error);
-//                        Toast.makeText(requireContext(), R.string.server_error, Toast.LENGTH_SHORT).show();
-//                    } else if (error instanceof NetworkError) {
-//                        Toast.makeText(requireContext(), R.string.network_error, Toast.LENGTH_SHORT).show();
-//                    } else if (error instanceof ParseError) {
-//                        Toast.makeText(requireContext(), R.string.parse_error, Toast.LENGTH_SHORT).show();
-//                    } else {
-//                        Toast.makeText(requireContext(), R.string.unknown_error, Toast.LENGTH_SHORT).show();
-//                    }
-//                    Log.d("Check", "" + error.getMessage());
-//                }
-//        ) {
-//            @Override
-//            protected Map<String, String> getParams() {
-//                Map<String, String> params = new HashMap<>();
-//                String updatedByatCount = ByatCnt.getText().toString();
-//                String BullNo = bullNumber.getText().toString();
-//
-//                params.put("byat_id", byatId);
-//                params.put("user_id", KisanId);
-//                params.put("pashu_id", PashuId);
-//                params.put("pashu_byat_count", updatedByatCount);
-//                params.put("byat_gender", byatGender);
-//
-//                String byatBirthdate = AnimalBijdanDate.getText().toString();
-//                SimpleDateFormat inputFormat = new SimpleDateFormat("dd/MM/yyyy");
-//                SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd");
-//                try {
-//                    Date date = inputFormat.parse(byatBirthdate);
-//                    String formattedDate = outputFormat.format(date);
-//                    params.put("byat_birthdate", formattedDate);
-//                    Log.d("Params", "byat_birthdate: " + formattedDate);
-//                } catch (ParseException e) {
-//                    e.printStackTrace();
-//                    Log.e("Params", "Invalid date format: " + byatBirthdate);
-//                }
-//                if(BullNo.equals("गाँव बैल")){
-//                    params.put("is_village_bull", bullNumber.getText().toString());
-//                } else if (!BullNo.isEmpty() && !BullNo.equals("गाँव बैल")){
-//                    params.put("is_village_bull", "");
-//                }
-//                params.put("doctor_number", DoctorNumber.getText().toString());
-//                if (!BullNo.isEmpty() && !BullNo.equals("गाँव बैल")) {
-//                    params.put("tarbar_bull_number", bullNumber.getText().toString());
-//                } else {
-//                    params.put("tarbar_bull_number", "");
-//                }
-//                Log.d("ByatParams", "byat_id: " + byatId);
-//                Log.d("ByatParams", "user_id: " + KisanId);
-//                Log.d("ByatParams", "pashu_id: " + PashuId);
-//                Log.d("ByatParams", "pashu_byat_cnt: " + updatedByatCount);
-//                Log.d("ByatParams", "byat_gender: " + byatGender);
-//                if(BullNo.equals("गाँव बैल")){
-//                    Log.d("ByatParams", "is_village_bull: " + bullNumber.getText().toString());
-//                } else if (!BullNo.isEmpty() && !BullNo.equals("गाँव बैल")){
-//                    Log.d("ByatParams", "is_village_bull: " + "");
-//                }
-//                Log.d("ByatParams", "doctor_number: " + DoctorNumber.getText().toString());
-//                if (!BullNo.isEmpty() && !BullNo.equals("गाँव बैल")) {
-//                    Log.d("ByatParams", "tarbar_bull_number: " + bullNumber.getText().toString());
-//                } else {
-//                    Log.d("ByatParams", "tarbar_bull_number: " + "");
-//                }
-//                return params;
-//            }
-//        };
-//        postRequest.setRetryPolicy(ApiUtils.DEFAULT_RETRY_POLICY);
-//        requestQueue.add(postRequest);
-//    }
+    private void UpdateDetailsAPI(String Id) {
+        dialog = new ProgressDialog(requireContext());
+        dialog.setMessage(getString(R.string.saving_data));
+        dialog.setCancelable(false);
+        dialog.show();
+        RequestQueue requestQueue = Volley.newRequestQueue(requireContext());
+        final StringRequest postRequest = new StringRequest(Request.Method.POST, UPDATE_BIJDAN_DATA,
+                response -> {
+                    dialog.dismiss();
+                    Log.d("AddBijdanDataAPI", "" + response);
+                    try {
+                        JSONObject jsonObject1 = new JSONObject(response);
+                        String Status = jsonObject1.getString("status");
+                        String Message = jsonObject1.getString("message");
 
-//    private void deleteData(String PashuId,String dataId) {
-//        dialog = new ProgressDialog(requireContext());
-//        dialog.setMessage(getString(R.string.deleting));
-//        dialog.setCancelable(false);
-//        dialog.show();
-//        String url = DELETE_BYAT;
-//        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
-//                new Response.Listener<String>() {
-//                    @Override
-//                    public void onResponse(String response) {
-//                        dialog.dismiss();
-//                        try {
-//                            Log.d("DeleteAnimalResponse",""+response);
-//                            JSONObject jsonObject = new JSONObject(response);
-//                            String status = jsonObject.getString("status");
-//                            String Message = jsonObject.getString("message");
-//                            if (status.equals("success")) {
-//                                Intent intent = new Intent(requireContext(), Checking.class);
-//                                intent.putExtra("isVerified", true);
-//                                intent.putExtra("message", Message);
-//                                intent.putExtra("nextActivity", MainActivity.class);
-//                                intent.putExtra("SELECT_DETAILS_FRAGMENT", true);
-//                                startActivity(intent);
-//                            } else {
-//                                Intent intent = new Intent(requireContext(), Checking.class);
-//                                intent.putExtra("isVerified", false);
-//                                intent.putExtra("message", Message);
-//                                intent.putExtra("nextActivity", MainActivity.class);
-//                                intent.putExtra("SELECT_DETAILS_FRAGMENT", true);
-//                                startActivity(intent);
-//                            }
-//                        } catch (JSONException e) {
-//                            dialog.dismiss();
-//                            e.printStackTrace();
-//                        }
-//                    }
-//                },
-//                new Response.ErrorListener() {
-//                    @Override
-//                    public void onErrorResponse(VolleyError error) {
-//                        dialog.dismiss();
-//                        Toast.makeText(requireContext(), "Error: " + error.getMessage(), Toast.LENGTH_SHORT).show();
-//                    }
-//                }) {
-//            @Override
-//            protected Map<String, String> getParams() {
-//                Map<String, String> params = new HashMap<>();
-//                params.put("pashu_id", PashuId);
-//                params.put("id", dataId);
-//                return params;
-//            }
-//        };
-//        stringRequest.setRetryPolicy(ApiUtils.DEFAULT_RETRY_POLICY);
-//        requestQueue.add(stringRequest);
-//    }
+                        if (Status.equalsIgnoreCase("true")) {
+
+                            AnimalNumber.setText("");
+                            AnimalType.setText("");
+                            bullNumber.setText("");
+                            DoctorNumber.setText("");
+                            KisanMobileNumber.setText("");
+                            KisanPassword.setText("");
+
+                            Intent intent = new Intent(requireContext(), Checking.class);
+                            intent.putExtra("isVerified", true);
+                            intent.putExtra("message", Message);
+                            intent.putExtra("nextActivity", LoadFilterFragments.class);
+                            intent.putExtra("PashuGarbhavati_fragment", true);
+                            startActivity(intent);
+                        } else {
+                            Intent intent = new Intent(requireContext(), Checking.class);
+                            intent.putExtra("isVerified", false);
+                            intent.putExtra("message", Message);
+                            intent.putExtra("nextActivity", LoadFilterFragments.class);
+                            intent.putExtra("PashuGarbhavati_fragment", true);
+                            startActivity(intent);
+                        }
+                    } catch (JSONException e) {
+                        dialog.dismiss();
+                        if (e instanceof JSONException) {
+                            Toast.makeText(requireContext(), R.string.json_parsing_error, Toast.LENGTH_SHORT).show();
+                        } else {
+                            Log.d("CheckException",""+e);
+                            Toast.makeText(requireContext(), R.string.generic_error, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                },
+                error -> {
+                    dialog.dismiss();
+                    if (error instanceof TimeoutError) {
+                        Toast.makeText(requireContext(), R.string.timeout_error, Toast.LENGTH_SHORT).show();
+                    } else if (error instanceof NoConnectionError) {
+                        Toast.makeText(requireContext(), R.string.no_connection_error, Toast.LENGTH_SHORT).show();
+                    } else if (error instanceof NetworkError) {
+                        Toast.makeText(requireContext(), R.string.network_error, Toast.LENGTH_SHORT).show();
+                    } else if (error instanceof ServerError) {
+                        Toast.makeText(requireContext(), R.string.server_error, Toast.LENGTH_SHORT).show();
+                    } else if (error instanceof ParseError) {
+                        Toast.makeText(requireContext(), R.string.parse_error, Toast.LENGTH_SHORT).show();
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                String BullNo = bullNumber.getText().toString();
+                String doctorNumber = DoctorNumber.getText().toString();
+                params.put("id", Id);
+                params.put("bull_number",BullNo);
+                params.put("doctor_number",doctorNumber);
+
+                String BijdanDate = AnimalBijdanDate.getText().toString();
+                SimpleDateFormat inputFormat = new SimpleDateFormat("dd/MM/yyyy");
+                SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd");
+                try {
+                    Date date = inputFormat.parse(BijdanDate);
+                    String formattedDate = outputFormat.format(date);
+                    params.put("bijdan_date",BijdanDate);
+                    Log.d("Params", "bijdan_date: " + formattedDate);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                    Log.e("Params", "Invalid date format: " + BijdanDate);
+                }
+
+                String FutureDate = ChildExpectedBirthdate.getText().toString();
+                SimpleDateFormat inputFormat1 = new SimpleDateFormat("dd/MM/yyyy");
+                SimpleDateFormat outputFormat1 = new SimpleDateFormat("yyyy-MM-dd");
+                try {
+                    Date date = inputFormat1.parse(FutureDate);
+                    String formattedDate1 = outputFormat1.format(date);
+                    params.put("future_birth_date",FutureDate);
+                    Log.d("Params", "future_birth_date: " + formattedDate1);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                    Log.e("Params", "Invalid date format: " + FutureDate);
+                }
+                return params;
+            }
+        };
+        postRequest.setRetryPolicy(ApiUtils.DEFAULT_RETRY_POLICY);
+        requestQueue.add(postRequest);
+    }
+
+    private void deleteData(String Id) {
+        dialog = new ProgressDialog(requireContext());
+        dialog.setMessage(getString(R.string.deleting));
+        dialog.setCancelable(false);
+        dialog.show();
+        String url = DELETE_GARBHAVATI_DATA;
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        dialog.dismiss();
+                        try {
+                            Log.d("DeleteAnimalResponse", "" + response);
+                            JSONObject jsonObject = new JSONObject(response);
+                            String status = jsonObject.optString("status");
+                            String message = jsonObject.optString("message");
+                            if (status.equalsIgnoreCase("success")) {
+
+                                Intent intent = new Intent(requireContext(), Checking.class);
+                                intent.putExtra("isVerified", true);
+                                intent.putExtra("message", message);
+                                intent.putExtra("nextActivity", LoadFilterFragments.class);
+                                intent.putExtra("PashuGarbhavati_fragment", true);
+                                startActivity(intent);
+                            } else {
+                                Intent intent = new Intent(requireContext(), Checking.class);
+                                intent.putExtra("isVerified", false);
+                                intent.putExtra("message", message);
+                                intent.putExtra("nextActivity", LoadFilterFragments.class);
+                                intent.putExtra("PashuGarbhavati_fragment", true);
+                                startActivity(intent);
+                            }
+                        } catch (JSONException e) {
+                            dialog.dismiss();
+                            Toast.makeText(requireContext(), "Parse error", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        dialog.dismiss();
+                        if (error instanceof TimeoutError) {
+                            Toast.makeText(requireContext(), R.string.timeout_error, Toast.LENGTH_SHORT).show();
+                        } else if (error instanceof NoConnectionError) {
+                            Toast.makeText(requireContext(), R.string.no_connection_error, Toast.LENGTH_SHORT).show();
+                        } else if (error instanceof AuthFailureError) {
+                            Toast.makeText(requireContext(), R.string.auth_failure_error, Toast.LENGTH_SHORT).show();
+                        } else if (error instanceof ServerError) {
+                            Log.d("ServerError",""+error);
+                            Toast.makeText(requireContext(), R.string.server_error, Toast.LENGTH_SHORT).show();
+                        } else if (error instanceof NetworkError) {
+                            Toast.makeText(requireContext(), R.string.network_error, Toast.LENGTH_SHORT).show();
+                        } else if (error instanceof ParseError) {
+                            Toast.makeText(requireContext(), R.string.parse_error, Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(requireContext(), R.string.unknown_error, Toast.LENGTH_SHORT).show();
+                        }
+                        Log.d("Check", "" + error.getMessage());
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("id", Id);
+                return params;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(requireContext());
+        stringRequest.setRetryPolicy(ApiUtils.DEFAULT_RETRY_POLICY);
+        requestQueue.add(stringRequest);
+    }
+
+
 
     @Override
     public void onAttach(@NonNull Context context) {
