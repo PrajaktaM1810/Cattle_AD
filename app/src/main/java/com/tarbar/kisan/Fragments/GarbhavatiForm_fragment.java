@@ -2,14 +2,10 @@ package com.tarbar.kisan.Fragments;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
-import static com.tarbar.kisan.Helper.constant.ADD_BYAT;
-import static com.tarbar.kisan.Helper.constant.Add_BIJDAN_DATA;
-import static com.tarbar.kisan.Helper.constant.DELETE_BYAT;
+import static com.tarbar.kisan.Helper.constant.ADD_GARBHAVATI_DATA;
 import static com.tarbar.kisan.Helper.constant.DELETE_GARBHAVATI_DATA;
-import static com.tarbar.kisan.Helper.constant.GET_BIJDAN_DATA;
-import static com.tarbar.kisan.Helper.constant.GET_BIJDAN_DETAILS;
-import static com.tarbar.kisan.Helper.constant.UPDATE_BIJDAN_DATA;
-import static com.tarbar.kisan.Helper.constant.UPDATE_BYAT_DATA;
+import static com.tarbar.kisan.Helper.constant.GET_GARBHAVATI_DETAILS;
+import static com.tarbar.kisan.Helper.constant.UPDATE_GARBHAVATI_DATA;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
@@ -38,7 +34,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.android.volley.AuthFailureError;
-import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.NetworkError;
 import com.android.volley.NoConnectionError;
 import com.android.volley.ParseError;
@@ -240,7 +235,7 @@ public class GarbhavatiForm_fragment extends Fragment {
                 Toast.makeText(requireContext(), R.string.error_password_not_matching, Toast.LENGTH_SHORT).show();
             } else {
                 if (EditForm) {
-//                    UpdatePashuAPI(animalId);
+                    UpdateDetails(bijdanId);
                 } else if (AddForm) {
                     AddBijdanDataAPI();
                 }
@@ -265,96 +260,6 @@ public class GarbhavatiForm_fragment extends Fragment {
             alert.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.BLACK);
         });
     }
-
-//    private void byatListData(String PashuId) {
-//        String url = GET_BYAT_LIST;
-//        RequestQueue requestQueue = Volley.newRequestQueue(getContext());
-//        StringRequest postRequest = new StringRequest(Request.Method.POST, url,
-//                new Response.Listener<String>() {
-//                    @Override
-//                    public void onResponse(String response) {
-//                        Log.d("APIResponse", "Response: " + response);
-//                        try {
-//                            JSONObject jsonObject = new JSONObject(response);
-//                            String status = jsonObject.getString("status");
-//                            if (status.equals("success")) {
-//                                JSONArray dataArray = jsonObject.getJSONArray("data");
-//                                byaatList2.clear();
-//                                if (dataArray.length() > 0) {
-//                                    JSONObject lastData = dataArray.getJSONObject(dataArray.length() - 1);
-//                                    globalByatCount = lastData.getString("pashu_byat_count");
-//                                    globalByatBirthdate = lastData.getString("byat_birthdate");
-//                                    Log.d("DebugTag", "globalByatCount: " + globalByatCount);
-//                                    Log.d("DebugTag", "globalByatBirthdate: " + globalByatBirthdate);
-//                                    String addition = String.valueOf(Integer.parseInt(globalByatCount) + 1);
-//                                    ByatCnt.setText("ब्यात " + addition);
-//                                    globalstr = addition;
-//
-//                                    for (int i = 0; i < dataArray.length(); i++) {
-//                                        JSONObject data = dataArray.getJSONObject(i);
-//                                        Map<String, String> byaatData = new HashMap<>();
-//                                        byaatData.put("byat_id", data.getString("byat_id"));
-//                                        byaatData.put("user_id", data.getString("user_id"));
-//                                        byaatData.put("pashu_id", data.getString("pashu_id"));
-//                                        byaatData.put("pashu_number", data.getString("pashu_number"));
-//                                        byaatData.put("pashu_type", data.getString("pashu_type"));
-//                                        byaatData.put("pashu_byat_count", data.getString("pashu_byat_count"));
-//                                        byaatData.put("byat_gender", data.getString("byat_gender"));
-//                                        byaatData.put("byat_birthdate", data.getString("byat_birthdate"));
-//                                        byaatData.put("is_village_bull", data.getString("is_village_bull"));
-//                                        byaatData.put("doctor_number", data.getString("doctor_number"));
-//                                        byaatData.put("kisan_number", data.getString("kisan_number"));
-//                                        byaatData.put("tarbar_bull_number", data.getString("tarbar_bull_number"));
-//                                        byaatList2.add(byaatData);
-//                                    }
-//                                } else {
-//                                    ByatCnt.setText("ब्यात 1");
-//                                    globalstr = "1";
-////                                    Toast.makeText(getContext(), R.string.str_data_not_found, Toast.LENGTH_SHORT).show();
-//                                }
-//                            } else if (status.equals("error")) {
-//                                ByatCnt.setText("ब्यात 1");
-//                                globalstr = "1";
-////                                Toast.makeText(getContext(), R.string.str_data_not_found, Toast.LENGTH_SHORT).show();
-//                            }
-//                        } catch (JSONException e) {
-//                            Log.d("JSONException", "" + e);
-//                            Toast.makeText(getContext(), R.string.json_parsing_error, Toast.LENGTH_SHORT).show();
-//                        }
-//                    }
-//                },
-//                new Response.ErrorListener() {
-//                    @Override
-//                    public void onErrorResponse(VolleyError error) {
-//                        if (error instanceof TimeoutError) {
-//                            Toast.makeText(getContext(), R.string.timeout_error, Toast.LENGTH_SHORT).show();
-//                        } else if (error instanceof NoConnectionError) {
-//                            Toast.makeText(getContext(), R.string.no_connection_error, Toast.LENGTH_SHORT).show();
-//                        } else if (error instanceof AuthFailureError) {
-//                            Toast.makeText(getContext(), R.string.auth_failure_error, Toast.LENGTH_SHORT).show();
-//                        } else if (error instanceof ServerError) {
-//                            Log.d("ServerError", "" + error);
-//                            Toast.makeText(getContext(), R.string.server_error, Toast.LENGTH_SHORT).show();
-//                        } else if (error instanceof NetworkError) {
-//                            Toast.makeText(getContext(), R.string.network_error, Toast.LENGTH_SHORT).show();
-//                        } else if (error instanceof ParseError) {
-//                            Toast.makeText(getContext(), R.string.parse_error, Toast.LENGTH_SHORT).show();
-//                        } else {
-//                            Toast.makeText(getContext(), R.string.unknown_error, Toast.LENGTH_SHORT).show();
-//                        }
-//                        Log.d("Check", "" + error.getMessage());
-//                    }
-//                }) {
-//            @Override
-//            protected Map<String, String> getParams() {
-//                Map<String, String> params = new HashMap<>();
-//                params.put("pashu_id", PashuId);
-//                return params;
-//            }
-//        };
-//        postRequest.setRetryPolicy(ApiUtils.DEFAULT_RETRY_POLICY);
-//        requestQueue.add(postRequest);
-//    }
 
     private void messageDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
@@ -395,7 +300,7 @@ public class GarbhavatiForm_fragment extends Fragment {
     }
 
     private void callApi() {
-//        deleteData(animalId);
+        deleteData(animalId);
     }
 
     private void showDatePickerDialog() {
@@ -407,8 +312,6 @@ public class GarbhavatiForm_fragment extends Fragment {
                 (view, year1, monthOfYear, dayOfMonth1) -> {
                     String selectedDate = String.format("%02d/%02d/%d", dayOfMonth1, monthOfYear + 1, year1);
                     AnimalBijdanDate.setText(selectedDate);
-
-                    // Calculate and set expected birth date based on animal type
                     calculateExpectedBirthDate(selectedDate);
                 }, year, month, dayOfMonth);
         datePickerDialog.getDatePicker().setMaxDate(calendar.getTimeInMillis());
@@ -440,7 +343,7 @@ public class GarbhavatiForm_fragment extends Fragment {
         dialog.setMessage(getString(R.string.getting_data));
         dialog.setCancelable(false);
         dialog.show();
-        String url = GET_BIJDAN_DETAILS;
+        String url = GET_GARBHAVATI_DETAILS;
         RequestQueue requestQueue = Volley.newRequestQueue(requireContext());
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
@@ -597,7 +500,7 @@ public class GarbhavatiForm_fragment extends Fragment {
         dialog.setCancelable(false);
         dialog.show();
         RequestQueue requestQueue = Volley.newRequestQueue(requireContext());
-        final StringRequest postRequest = new StringRequest(Request.Method.POST, Add_BIJDAN_DATA,
+        final StringRequest postRequest = new StringRequest(Request.Method.POST, ADD_GARBHAVATI_DATA,
                 response -> {
                     dialog.dismiss();
                     Log.d("AddBijdanDataAPI", "" + response);
@@ -606,7 +509,7 @@ public class GarbhavatiForm_fragment extends Fragment {
                         String Status = jsonObject1.getString("status");
                         String Message = jsonObject1.getString("message");
 
-                        if (Status.equalsIgnoreCase("true")) {
+                        if (Status.equalsIgnoreCase("success")) {
 
                             AnimalNumber.setText("");
                             AnimalType.setText("");
@@ -695,13 +598,13 @@ public class GarbhavatiForm_fragment extends Fragment {
         requestQueue.add(postRequest);
     }
 
-    private void UpdateDetailsAPI(String Id) {
+    private void UpdateDetails(String Id) {
         dialog = new ProgressDialog(requireContext());
         dialog.setMessage(getString(R.string.saving_data));
         dialog.setCancelable(false);
         dialog.show();
         RequestQueue requestQueue = Volley.newRequestQueue(requireContext());
-        final StringRequest postRequest = new StringRequest(Request.Method.POST, UPDATE_BIJDAN_DATA,
+        final StringRequest postRequest = new StringRequest(Request.Method.POST, UPDATE_GARBHAVATI_DATA,
                 response -> {
                     dialog.dismiss();
                     Log.d("AddBijdanDataAPI", "" + response);
@@ -710,7 +613,7 @@ public class GarbhavatiForm_fragment extends Fragment {
                         String Status = jsonObject1.getString("status");
                         String Message = jsonObject1.getString("message");
 
-                        if (Status.equalsIgnoreCase("true")) {
+                        if (Status.equalsIgnoreCase("success")) {
 
                             AnimalNumber.setText("");
                             AnimalType.setText("");
@@ -814,6 +717,7 @@ public class GarbhavatiForm_fragment extends Fragment {
                             JSONObject jsonObject = new JSONObject(response);
                             String status = jsonObject.optString("status");
                             String message = jsonObject.optString("message");
+
                             if (status.equalsIgnoreCase("success")) {
 
                                 Intent intent = new Intent(requireContext(), Checking.class);

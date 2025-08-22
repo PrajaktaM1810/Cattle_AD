@@ -6,7 +6,6 @@ import static com.tarbar.kisan.Helper.constant.GET_ANIMAL_LIST;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.TypedValue;
@@ -26,7 +25,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkError;
@@ -35,9 +33,6 @@ import com.android.volley.ParseError;
 import com.android.volley.ServerError;
 import com.android.volley.TimeoutError;
 import com.tarbar.kisan.Activities.LoadFilterFragments;
-import com.tarbar.kisan.Activities.LoadFragments;
-import com.tarbar.kisan.Activities.MainActivity;
-import com.tarbar.kisan.Adapter.Doodh_List_Adapter;
 import com.tarbar.kisan.Adapter.Pashu_Garbhavati_List_Adapter;
 import com.tarbar.kisan.Helper.ApiUtils;
 import com.tarbar.kisan.Helper.Iconstant;
@@ -49,7 +44,6 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Pattern;
 
 import android.util.Log;
 import android.widget.Toast;
@@ -63,7 +57,6 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import java.util.Arrays;
 import android.widget.ImageView;
 
 public class PashuGarbhavati_fragment extends Fragment {

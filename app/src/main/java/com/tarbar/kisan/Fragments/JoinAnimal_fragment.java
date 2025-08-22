@@ -1,6 +1,6 @@
 package com.tarbar.kisan.Fragments;
 
-import static com.tarbar.kisan.Helper.constant.ADD_ANIMAL;
+import static com.tarbar.kisan.Helper.constant.ADD_PASHU_DATA;
 
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
@@ -20,10 +20,13 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+import java.util.Locale;
+import java.text.SimpleDateFormat;
+import java.text.ParseException;
+import java.util.Date;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
@@ -31,7 +34,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.android.volley.AuthFailureError;
-import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.NetworkError;
 import com.android.volley.NoConnectionError;
 import com.android.volley.ParseError;
@@ -217,7 +219,7 @@ public class JoinAnimal_fragment extends Fragment {
         dialog.setCancelable(false);
         dialog.show();
         RequestQueue requestQueue = Volley.newRequestQueue(requireContext());
-        final StringRequest postRequest = new StringRequest(Request.Method.POST, ADD_ANIMAL,
+        final StringRequest postRequest = new StringRequest(Request.Method.POST, ADD_PASHU_DATA,
                 response -> {
                     dialog.dismiss();
                     Log.d("AddAnimalAPI", "" + response);
@@ -280,17 +282,18 @@ public class JoinAnimal_fragment extends Fragment {
                 params.put("type", AnimalType.getText().toString());
                 params.put("animal_caste", casteOptions);
                 params.put("animal_gender", AnimalGender.getText().toString());
-//                params.put("animal_dob", AnimalBirthdate.getText().toString());
 
-                String byatBirthdate = AnimalBirthdate.getText().toString();
-                SimpleDateFormat inputFormat = new SimpleDateFormat("dd/MM/yyyy");
-                SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd");
+                String byatBirthdate = AnimalBirthdate.getText().toString().trim();
+                SimpleDateFormat inputFormat = new SimpleDateFormat("dd/MM/yyyy", java.util.Locale.getDefault());
+                SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd", java.util.Locale.getDefault());
 
                 try {
                     Date date = inputFormat.parse(byatBirthdate);
-                    String formattedDate = outputFormat.format(date);
-                    params.put("animal_dob", formattedDate);
-                    Log.d("Request_Params", "animal_dob: " + formattedDate);
+                    if (date != null) {
+                        String formattedDate = outputFormat.format(date);
+                        params.put("animal_dob", formattedDate);
+                        Log.d("Request_Params", "animal_dob: " + formattedDate);
+                    }
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
@@ -303,7 +306,8 @@ public class JoinAnimal_fragment extends Fragment {
                 Log.d("Request_Params", "type: " + AnimalType.getText().toString());
                 Log.d("Request_Params", "animal_caste: " + casteOptions);
                 Log.d("Request_Params", "animal_gender: " + AnimalGender.getText().toString());
-                Log.d("Request_Params", "animal_dob: " + AnimalBirthdate.getText().toString());
+                Log.d("Request_Params", "animal_dob: " + byatBirthdate);
+                Log.d("Request_Params", "animal_dob(final): " + params.get("animal_dob"));
                 Log.d("Request_Params", "byat_count: " + ByatNumber.getText().toString());
                 Log.d("Request_Params", "kisan_number: " + KisanMobileNumber.getText().toString());
 
@@ -313,6 +317,7 @@ public class JoinAnimal_fragment extends Fragment {
         postRequest.setRetryPolicy(ApiUtils.DEFAULT_RETRY_POLICY);
         requestQueue.add(postRequest);
     }
+
 
     @Override
     public void onAttach(@NonNull Context context) {

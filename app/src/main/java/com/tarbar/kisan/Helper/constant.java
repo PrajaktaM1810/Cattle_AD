@@ -74,8 +74,8 @@ public class constant {
     public static String UPDATE_USER_ROLE = BASE_URL + "users/updateUserRole";
 
 //   PASHU
+    public static String ADD_PASHU_DATA = BASE_URL + "animals/add_pashu_details";
     public static String GET_ANIMAL_LIST = BASE_URL + "animals/get_animal_list";
-    public static String ADD_ANIMAL = BASE_URL + "animals/register_animal";
     public static String GET_ANIMAL_DATA = BASE_URL + "animals/get_animal_data";
     public static String UPDATE_ANIMAL = BASE_URL + "animals/update_animal_data";
     public static String DELETE_ANIMAL = BASE_URL + "animals/delete_animal";
@@ -98,11 +98,13 @@ public class constant {
     public static String GET_BULL_LIST = BASE_URL + "animals/getBullList";
 
 //    PASHU GARBHAVATI MODULE
-    public static String GET_BIJDAN_DETAILS = BASE_URL + "animals/get_bijadan_details";
-    public static String GET_BIJDAN_DATA = BASE_URL + "animals/get_pashu_garbhavati_list";
-    public static String Add_BIJDAN_DATA = BASE_URL + "animals/pashu_garbhavati_data_addition";
-    public static String UPDATE_BIJDAN_DATA = BASE_URL + "animals/update_bijadan_details";
+
+    public static String ADD_GARBHAVATI_DATA = BASE_URL + "animals/add_garbhavati_data";
+    public static String GET_GARBHAVATI_LIST = BASE_URL + "animals/get_garbhavati_list";
+    public static String GET_GARBHAVATI_DETAILS = BASE_URL + "animals/get_garbhavati_details";
+    public static String UPDATE_GARBHAVATI_DATA = BASE_URL + "animals/update_garbhavati_details";
     public static String DELETE_GARBHAVATI_DATA = BASE_URL + "animals/delete_garbhavati_data";
+
 
 //    FREE BIJDAN MODULE
     public static String FREE_BIJDAN_ANIMAL_LIST = BASE_URL + "animals/ax_get_animal_list_by_date_range";
